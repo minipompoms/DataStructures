@@ -1,7 +1,7 @@
 package linkedlists;
 /**
  *
- * @author akatz17
+ * @author Paige Kohn
  */
 public class LLI
 
@@ -9,21 +9,35 @@ public class LLI
 
     private LLI_Node head;
 
+    /**
+     *
+     */
     public LLI()
     {
         head = null;
     }
 
+    /**
+     * checks if list is empty
+     * @return boolean - success or failure
+     */
     public boolean isEmpty()
     {
         return head == null;
     }
 
+    /**
+     * removes all elements from list
+     */
     public void makeEmpty()
     {
         head = null;
     }
 
+    /**
+     * insert value at head of list
+     * @param val value to be inserted
+     */
     public void insertFirst(int val)
     {
         LLI_Node first = new LLI_Node(val);
@@ -31,6 +45,10 @@ public class LLI
         head = first;
     }
     
+    /**
+     * insert given value
+     * @param val value to be inserted
+     */
     public void insertLast(int val)
     {
         if (isEmpty())
@@ -49,6 +67,12 @@ public class LLI
         }
     }
 
+    /**
+     * insert value before given element
+     * @param bef integer value before which val is to be inserted
+     * @param val integer to be inserted
+     * @return boolean - success or failure
+     */
     public boolean insertBefore(int bef, int val)
     {
         int index = indexOf(bef);
@@ -75,9 +99,9 @@ public class LLI
 
     /**
      * insert value after given element
-     * @param aft
-     * @param val
-     * @return
+     * @param aft integer value after which val is to be inserted
+     * @param val integer to be inserted
+     * @return boolean - success or failure
      */
     public boolean insertAfter(int aft, int val)
     {
@@ -103,8 +127,8 @@ public class LLI
 
     /**
      * removes given value
-     * @param val
-     * @return
+     * @param val value to be removed
+     * @return boolean - success or failure
      */
     public boolean remove(int val)
     {
@@ -132,32 +156,13 @@ public class LLI
             }
                  previous = current;
         current = current.getNext();
-        }
-       /* else
-        {
-            
-            for (int ix = 0; ix < size(); ix++) //traverse list
-                {
-                    if (val == current.getValue()) //find corresponding node
-                {
-                    previous.next = current.next; //remove node it's a match
-                    return true;
-        }
-            else
-            {
-                previous = current;
-                current = current.next;
-            }
-    }
-    }
-    */
-      
+        } 
        return false;
 }
 
     /**
      * removes first value in the linked list
-     * @return
+     * @return boolean - success or failure
      */
     public boolean removeFirst()
     {
@@ -174,7 +179,7 @@ public class LLI
 
     /**
      * removes last value in linked list
-     * @return
+     * @return success or failure
      */
     public boolean removeLast()
     {
@@ -204,8 +209,8 @@ public class LLI
     }
 
     /**
-     *
-     * @return
+     * return first element in list
+     * @return integer - value
      * @throws LLI_EmptyListException
      */
     public int getFirst() throws LLI_EmptyListException 
@@ -220,8 +225,8 @@ public class LLI
     }
 
     /**
-     * 
-     * @return
+     * return last element in the list
+     * @return integer - value
      * @throws LLI_EmptyListException
      */
     public int getLast() throws LLI_EmptyListException 
@@ -240,7 +245,8 @@ public class LLI
     }
 
     /**
-     *
+     * returns the list size
+     * @return integer - number of elements in list
      * @returns size of linked list
      */
     public int size()

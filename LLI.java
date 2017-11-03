@@ -10,7 +10,7 @@ public class LLI
     private LLI_Node head;
 
     /**
-     *
+     * constructor
      */
     public LLI()
     {
@@ -154,8 +154,8 @@ public class LLI
                 previous.setNext(previous.next);
                 return true;
             }
-                 previous = current;
-        current = current.getNext();
+                previous = current;
+                current = current.getNext();
         } 
        return false;
 }
@@ -211,9 +211,9 @@ public class LLI
     /**
      * return first element in list
      * @return integer - value
-     * @throws LLI_EmptyListException
+     * @throws LLI_EmptyListExc
      */
-    public int getFirst() throws LLI_EmptyListException 
+    public int getFirst() throws LLI_EmptyListExc 
     {
         LLI_Node current = head;
         if (!isEmpty()) //checks that LL is not empty
@@ -221,20 +221,20 @@ public class LLI
             return current.getValue();
         }
         else //throws an exception if list is empty
-            throw new LLI_EmptyListException();
+            throw new LLI_EmptyListExc();
     }
 
     /**
      * return last element in the list
      * @return integer - value
-     * @throws LLI_EmptyListException
+     * @throws LLI_EmptyListExc
      */
-    public int getLast() throws LLI_EmptyListException 
+    public int getLast() throws LLI_EmptyListExc 
     {
         LLI_Node last = head.getNext();
         if (isEmpty())
         {
-            throw new LLI_EmptyListException(); //throws an excp if empty list
+            throw new LLI_EmptyListExc(); //throws an excp if empty list
         }
         else
             while (last.getNext() != null) //keeps going until reaches null node

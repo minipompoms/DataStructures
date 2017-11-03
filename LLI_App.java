@@ -54,8 +54,8 @@ public class LLI_App {
             System.out.println("first value: "+value);
             value = testList.getLast();
             System.out.println("last value: "+value);
-        } catch (LLI_EmptyListException e) {
-            System.out.println(e);
+        } catch (LLI_EmptyListExc e) {
+            System.out.println(e.toString());
         }
         
         System.out.println("List Size: "+testList.size());

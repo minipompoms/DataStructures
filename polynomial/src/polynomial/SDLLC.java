@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package polynomial;
-
+import java.util.NoSuchElementException;
 /**
  *
  * @author Paige Kohn
@@ -94,20 +94,29 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
        throw new NotFoundException();         
     }
    
+    /**
+     * initialize the list for a subsequent call to next
+     */
     @Override
     public void setFirst() 
     {
         
     }
-
+      /**
+     * indicate whether a call to next will succeed
+     * @return boolean true if the current node is not null, false otherwise
+     */
     @Override
     public boolean hasNext() 
     {
-        while (head.next != null)
+        if (head!= null)
         {
             return true;
         }
+        else
+        {
         return false;
+        }
     }
 
     /**
@@ -118,9 +127,25 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public Type next() 
     {
-        Type current = null;
+        if (hasNext())
+        {
+            Type next = head.getInfo();
+            head = head.getNext();
+            return next;
+        }
         
-        return current;
+        else
+        {
+            throw new NoSuchElementException();
+        }
+    }
+    
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder ts = new StringBuilder();
+        return ts.toString();
     }
     
    

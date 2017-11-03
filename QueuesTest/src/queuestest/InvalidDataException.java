@@ -1,4 +1,4 @@
-package QueueArray;
+package queuestest;
 
 public class InvalidDataException extends RuntimeException{
 	/**

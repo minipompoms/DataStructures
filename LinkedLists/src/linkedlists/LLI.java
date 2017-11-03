@@ -4,7 +4,6 @@ package linkedlists;
  * @author Paige Kohn
  */
 public class LLI
-
 {
 
     private LLI_Node head;

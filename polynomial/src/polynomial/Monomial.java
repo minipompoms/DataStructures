@@ -13,16 +13,21 @@ public class Monomial implements Comparable<Monomial>{
     
     private int degree; //degree of the term
     private double coeff; //coefficient of the term
-
+  
+    
     /**
-     *
-     * @param degree
-     * @param coeff
+     * constructor
+     * @param degree exponent of the value
+     * @param coeff coefficient of the term
      */
     public Monomial(int degree, double coeff) 
     {
+        if (degree < 0)
+        {
+            throw new IllegalArgumentException("Invalid: exponent must be positive");
+        }
         this.degree = degree;
-        this.coeff = coeff;
+        this.coeff = coeff;       
     }
 
     /**
@@ -61,16 +66,29 @@ public class Monomial implements Comparable<Monomial>{
         this.coeff = coeff;
     }
     
-    @Override
-    public boolean equals(Object obj) 
+ 
+    public boolean equals(Monomial other) 
     {
-        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+        return degree == other.degree && coeff == other.coeff;
     }
 
+    /**
+     *
+     * @param other
+     * @return
+     */
     @Override
-    public int compareTo(Monomial o) 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int compareTo(Monomial other) 
+    {   
+        
+        
+        return 0;
     }
     
+    @Override
+    public String toString()
+    {
+        StringBuilder ts = new StringBuilder();
+        return ts.toString();
+    }  
 }

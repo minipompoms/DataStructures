@@ -14,10 +14,8 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     
     private Node<Type> head; //node
     
-    //constructor
-
     /**
-     *
+     *constructor
      */
     public SDLLC()
     {
@@ -25,13 +23,7 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
         head.setNext(head);
         head.setPrev(head);
     }
-
-    private SDLLC(Object object) 
-    {
-      
-    }
-
-   
+ 
     @Override
     public void insert(Type info) 
     {
@@ -100,7 +92,22 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public void setFirst() 
     {
+        Node<Type> first;
         
+        
+        
+    }
+    
+    public int size()
+    {
+        int count = 0;
+        Node<Type> current = head;
+        while (current.next != null)
+        {
+            current = current.getNext();
+            count++;
+        }
+        return count;
     }
       /**
      * indicate whether a call to next will succeed
@@ -140,6 +147,7 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
         }
     }
     
+  
     
     @Override
     public String toString()

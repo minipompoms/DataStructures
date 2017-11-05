@@ -4,6 +4,7 @@ package polynomial;
 /**
  * interface for a generic Sorted Doubly Linked List
  * @author katz 
+ * @param <Type> 
  */
 public interface SDLLI<Type>
 {
@@ -17,6 +18,7 @@ public interface SDLLI<Type>
      * remove the node holding value T
      * @param val - T value to be removed
      * @return boolean true if removed, false, if no such value in the list
+     * @throws polynomial.NotFoundException
      */
     public boolean remove(Type val) throws NotFoundException;
     

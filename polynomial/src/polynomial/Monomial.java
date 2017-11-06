@@ -89,6 +89,15 @@ public class Monomial implements Comparable<Monomial>{
     public String toString()
     {
         StringBuilder ts = new StringBuilder();
+        ts.append(this.coeff);
+        if (this.degree == 1)
+        {
+            ts.append("x");
+        }
+        if (this.degree > 1)
+        {
+            ts.append("x^").append(this.degree).append(" ");
+        }
         return ts.toString();
     }  
 }

@@ -32,11 +32,26 @@ public class Polynomial {
     }
     
     /**
-     * to add another polynomial to the given instance
+     * 
      * @param other
-     */
+     * to add another polynomial to the given instance
+     */ 
     public void addition(Polynomial other)
     {
+       sum(other); //adds values by using addition method
+       
+       terms.setFirst(); //calls list and modifies 
+       
+    }
+    
+    /**
+     * 
+     * @param other
+     * @return sum of polynomials, original remains unaltered
+     */
+    public Polynomial sum(Polynomial other)
+    {
+      
         Polynomial result = new Polynomial();
         Monomial temp = null;
         while(terms.hasNext())
@@ -56,61 +71,86 @@ public class Polynomial {
               result.terms.next().setDegree(other.terms.next().getDegree());
           }
         }
-  
-    }
-    
-    /**
-     *
-     * @param other
-     * @return sum of polynomials
-     */
-    public Polynomial sum(Polynomial other)
-    {
-       Polynomial temp = new Polynomial();
-       while(terms.hasNext())
-       {
-           terms.next().getCoeff();
-       }
         return other;
     }
  
     /**
-     *
+     * multiplies by constant & changes its value
      * @param constant
      */
-    public void timesConst(double constant)
+    public void timesConstant(double constant)           
     {
+        Polynomial product = constantProduct(constant);
+        terms.setFirst();
+                
         
     }
     
     /**
-     *
+     * multiplication by constant with original value unchanged
      * @param constant
-     * @return
+     * @return product of polynomial
      */
-    public Polynomial constProduct(double constant)
+    public Polynomial constantProduct(double constant)
     {
-      Polynomial product = null;
-      return product;
+      Polynomial p = new Polynomial(); //new instance of polynomial
       
+      while(terms != null) //loop until all values are read
+      {        
+          p.terms.next().setCoeff(terms.next().getCoeff()*constant); //multiply constant by value
+          p.terms.next().setDegree(terms.next().getDegree()); //with constant degree is unchanged
+      }
+      return p;//product is returned    
     }    
     
     /**
-     *
+     * multiplies given instance by another polynomial
      * @param other
-     * @return
+     * @return new polynomial value
      */
     public Polynomial product(Polynomial other)
     {
+        Polynomial p = new Polynomial();
+        double tempCoeff = 0;
+        int tempExponent = 0;
+        
+        while (terms != null)
+        {           
+            tempCoeff *= other.terms.next().getCoeff();
+            tempExponent += other.terms.next().getDegree();
+            p.terms.next().setCoeff(tempCoeff);
+            p.terms.next().setDegree(tempExponent);
+                       
+        }
         return other;
     }
+    
     
     @Override
     public String toString()
     {
         StringBuilder ts =new StringBuilder();
+        ts.append(("terms:"));
+        if (terms.size()>0)
+        {  
+            for(int ix = 0; ix<terms.size(); ++ix)
+            {
+                ts.append(terms.next().toString());
+            }
+        
+        }   
+            
+            
+        
+        
+        /*while (terms.hasNext())
+            {
+               ts.append(terms.next()).append(" \n");            
+            }
+       */
         return ts.toString();
+        
     }
-
+    
    
 }

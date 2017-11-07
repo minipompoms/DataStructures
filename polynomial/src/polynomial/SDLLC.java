@@ -19,7 +19,7 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
      */
     public SDLLC()
     {
-        head = new Node<Type>(null);
+        head = new Node<>(null);
         head.setNext(head);
         head.setPrev(head);
     }
@@ -27,30 +27,47 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public void insert(Type info) 
     {
-         Node<Type> newNode = new Node<Type>(info);
-         Node<Type> current = head.getNext();
-         Node<Type> previous = head;
+//         Node<Type> newNode = new Node<>(info);
+//         Node<Type> previous = head;
+//         Node<Type> current = head.getNext();
+        
+                     
+	
+
+		if (head.getInfo() == null)
+			head = new Node<>(info);
+		else{
+			Node<Type> temp = head;
+			head = new Node<>(info);
+			head.setNext(temp);
+		}
+                System.out.println(head.info);
+}
+
          
-         while (current != head)
+         /*while (current != head)
          {
             if(info.compareTo(current.getInfo())<0)//checks the position for insertion
             {
-                break; //break out of look to insert node here
+                System.out.println("in if current"+current.getInfo());
+                System.out.println("prev "+previous.getInfo());
             }
             else
             {   
                 //keep checking next node
                 previous = current;
+                
                 current = current.getNext();
             }
          }
-         
+         */
          //insert node
-         newNode.setNext(current);
-         previous.setNext(newNode);
-         newNode.setPrev(previous);
-         current.setPrev(newNode);        
-    }
+         //newNode.setNext(current);
+         //previous.setNext(newNode);
+         //newNode.setPrev(previous);
+         //current.setPrev(newNode);     
+  
+
 
     /**
      * remove the node holding value Type
@@ -116,14 +133,7 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public boolean hasNext() 
     {
-        if (head!= null)
-        {
-            return true;
-        }
-        else
-        {
-        return false;
-        }
+        return head!= null;
     }
 
     /**

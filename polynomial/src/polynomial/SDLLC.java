@@ -27,47 +27,40 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public void insert(Type info) 
     {
-//         Node<Type> newNode = new Node<>(info);
-//         Node<Type> previous = head;
-//         Node<Type> current = head.getNext();
+        Node<Type> newNode = new Node<>(info);
+        Node<Type> current = head.next;
+        Node<Type> previous = head;
         
-                     
-	
-
-		if (head.getInfo() == null)
-			head = new Node<>(info);
-		else{
-			Node<Type> temp = head;
-			head = new Node<>(info);
-			head.setNext(temp);
-		}
-                System.out.println(head.info);
-}
-
-         
-         /*while (current != head)
-         {
-            if(info.compareTo(current.getInfo())<0)//checks the position for insertion
+        if (head.getInfo() == null)//if link is null insert at head
             {
-                System.out.println("in if current"+current.getInfo());
-                System.out.println("prev "+previous.getInfo());
+            head = new Node<>(info);
             }
-            else
-            {   
-                //keep checking next node
+        
+        else if (info.compareTo(head.info)<0) //checks the position for insertion before 
+        {
+            newNode.next=head;
+            head = newNode;			
+	}
+        
+        else 
+        {          
+            while(current != null)
+            {
+                if (info.compareTo(current.info)<0)//will now check for insertion after 
+                {
+                break;
+                }
                 previous = current;
+                current = current.next;
                 
-                current = current.getNext();
             }
-         }
-         */
-         //insert node
-         //newNode.setNext(current);
-         //previous.setNext(newNode);
-         //newNode.setPrev(previous);
-         //current.setPrev(newNode);     
-  
-
+            
+            newNode.next = previous.next; //insert item 
+            previous.next = newNode;
+            
+        }
+               
+}
 
     /**
      * remove the node holding value Type
@@ -108,8 +101,8 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
      */
     @Override
     public void setFirst() 
-    {
-        Node<Type> first;
+    {        
+       
         
         
         
@@ -144,17 +137,14 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public Type next() 
     {
-        if (hasNext())
+        if (!hasNext())
         {
+          throw new NoSuchElementException("no such element"); 
+        }
+         
             Type next = head.getInfo();
-            head = head.getNext();
+            head = head.next;
             return next;
-        }
-        
-        else
-        {
-            throw new NoSuchElementException();
-        }
     }
     
   
@@ -163,6 +153,12 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     public String toString()
     {
         StringBuilder ts = new StringBuilder();
+        Node<Type> current = head;
+        while (current != null)
+        {
+            ts.append(current.getInfo()).append("  ");
+            current = current.getNext();
+        }
         return ts.toString();
     }
     

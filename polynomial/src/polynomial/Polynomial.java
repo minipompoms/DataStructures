@@ -19,9 +19,8 @@ public class Polynomial {
     public Polynomial()
     {
         terms = new SDLLC<>();
-     
     }
-    
+
     /**
      * to add a single monomial term the list
      * @param term 
@@ -38,9 +37,13 @@ public class Polynomial {
      */ 
     public void addition(Polynomial other)
     {
+         if (terms == null)
+        {
+            throw new IllegalArgumentException("empty list");
+        }
        sum(other); //adds values by using addition method
        
-       terms.setFirst(); //calls list and modifies 
+        //calls list and modifies 
        
     }
     
@@ -51,12 +54,16 @@ public class Polynomial {
      */
     public Polynomial sum(Polynomial other)
     {
-      
+        if (terms == null)
+        {
+            throw new IllegalArgumentException("empty list");
+        }
         Polynomial result = new Polynomial();
         Monomial temp = null;
-        while(terms.hasNext())
+        
+        while(terms!= null)
         {
-          if(terms.next().equals(other.terms.next()))//if exponents & coefficients are alike
+          if(terms.next().getDegree() == other.terms.next().getDegree())//if exponents & coefficients are alike
                 {
                     temp.setDegree(terms.next().getDegree()+other.terms.next().getDegree()); //keep track of exponents
 
@@ -93,13 +100,27 @@ public class Polynomial {
      */
     public Polynomial constantProduct(double constant)
     {
-      Polynomial p = new Polynomial(); //new instance of polynomial
+        Polynomial p = new Polynomial(); //new instance of polynomial
+        
+         while(terms.hasNext())
+         {
+            Monomial m = terms.next(); //retrieve values
+            double coeff = m.getCoeff();
+            int exponent = m.getDegree();    
+            coeff*=constant; //multiply constant by value 
+            m.setCoeff(coeff); //set values
+            m.setDegree(exponent);  
+            p.addTerm(new Monomial(exponent, coeff)); //apply to the new instance
+         }
+
+             
+ 
+           
+           
+       
+            
+          //p.terms.next().setDegree(terms.next().getDegree()); //with constant degree is unchanged
       
-      while(terms != null) //loop until all values are read
-      {        
-          p.terms.next().setCoeff(terms.next().getCoeff()*constant); //multiply constant by value
-          p.terms.next().setDegree(terms.next().getDegree()); //with constant degree is unchanged
-      }
       return p;//product is returned    
     }    
     
@@ -130,26 +151,14 @@ public class Polynomial {
     public String toString()
     {
         StringBuilder ts =new StringBuilder();
-        ts.append(("terms:"));
-        if (terms.size()>0)
-        {  
-            for(int ix = 0; ix<terms.size(); ++ix)
-            {
-                ts.append(terms.next().toString());
-            }
-        
-        }   
+        ts.append((" polys: "));
+   
+        while (terms.hasNext())
+        {
             
-            
-        
-        
-        /*while (terms.hasNext())
-            {
-               ts.append(terms.next()).append(" \n");            
-            }
-       */
+            ts.append(terms.next()).append("  ");           
+        }
         return ts.toString();
-        
     }
     
    

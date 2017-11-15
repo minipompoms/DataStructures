@@ -17,24 +17,28 @@ public class PolynomialApp  {
         Polynomial p1 = new Polynomial();
         Polynomial p2 = new Polynomial();
        
-        
+        Polynomial p3 = new Polynomial();
      
        //p2.addTerm(new Monomial(2,4));
        
-       p1.addTerm(new Monomial(3,2));
        p1.addTerm(new Monomial(2,5));
-       System.out.println(p1);
-       p2.addTerm(new Monomial(4,4));
+       p1.addTerm(new Monomial(2,4));
+       p1.addTerm(new Monomial(2,3));
+       p1.addTerm(new Monomial(2,2));
+       p1.addTerm(new Monomial(2,9));
+       
+       //System.out.println(p1.terms.toString());
+       p3.addTerm(new Monomial(4,4));
        p2.addTerm(new Monomial(4,4));
       // System.out.println(p2.toString());
-       //Polynomial sum = p2.sum(p1);
+       Polynomial sum = p2.sum(p3);
        //Polynomial constant = p2.constantProduct(2);
        //p1.constantProduct(2);
        System.out.println(p2.toString());
  
         //System.out.println(constant.toString());
         System.out.println(p1.toString());
-               System.out.println(p2.toString());
+        System.out.println(p2.toString());
 
        
         

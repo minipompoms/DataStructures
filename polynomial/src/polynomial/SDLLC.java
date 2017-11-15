@@ -59,9 +59,8 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
             previous.next = newNode;
             
         }
-               
-}
-
+                                        
+    }
     /**
      * remove the node holding value Type
      * @param info - Type value to be removed
@@ -103,7 +102,7 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     public void setFirst() 
     {        
        
-        
+       Node<Type> temp = head; 
         
         
     }
@@ -137,18 +136,16 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public Type next() 
     {
-        if (!hasNext())
+        if (hasNext())
         {
-          throw new NoSuchElementException("no such element"); 
-        }
-         
             Type next = head.getInfo();
             head = head.next;
             return next;
+        }
+        else 
+            throw new NoSuchElementException("no such element"); 
     }
-    
-  
-    
+       
     @Override
     public String toString()
     {
@@ -178,8 +175,8 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
        public Node(Type info)
        {
            this.info = info;
-           this.prev = null;
-           this.next = null;         
+           this.prev = prev;
+           this.next = next;         
        }
        
        public void setPrev(Node <Type> node)

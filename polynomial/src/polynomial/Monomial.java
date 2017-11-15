@@ -80,9 +80,16 @@ public class Monomial implements Comparable<Monomial>{
     @Override
     public int compareTo(Monomial other) 
     {   
-        
-        
-        return 0;
+      if (this.degree > other.degree)
+      {
+          return -1;
+      }
+      else if (degree < other.degree)
+      {
+          return 1;
+      }
+       else
+          return 0;  
     }
     
     @Override

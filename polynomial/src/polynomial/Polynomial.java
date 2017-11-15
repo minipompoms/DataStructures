@@ -58,24 +58,34 @@ public class Polynomial {
         {
             throw new IllegalArgumentException("empty list");
         }
-        Polynomial result = new Polynomial();
-        Monomial temp = null;
+        
+        Polynomial result = new Polynomial(); //new polynomial to be returned
+        
         
         while(terms!= null)
         {
-          if(terms.next().getDegree() == other.terms.next().getDegree())//if exponents & coefficients are alike
-                {
-                    temp.setDegree(terms.next().getDegree()+other.terms.next().getDegree()); //keep track of exponents
-
-                        result.terms.next().setDegree(temp.getDegree()); //add terms to result                        
+            
+            int holdDegree = terms.next().getDegree();
+           
+            int polyDegree = other.terms.next().getDegree();
+            //double holdCoeff = terms.next().getCoeff();
+            //double polyCoeff = other.terms.next().getCoeff();
+            //Monomial temp = new Monomial(holdDegree, holdCoeff);
+            
+            if(holdDegree == polyDegree)//if exponents share same term
+            {
+                //temp.setDegree(holdDegree+polyDegree); //keep track of exponents
+                
+               // result.terms.next().setDegree(holdDegree); //add terms to result                        
             }
-          else if(terms.next().getDegree()<other.terms.next().getDegree()) //check for lesser degree of the two
+            
+          else if(holdDegree<polyDegree) //check for lesser degree of the two
           {
               result.terms.next().setDegree(terms.next().getDegree()); //update the result 
           }
           else 
           {
-              result.terms.next().setDegree(other.terms.next().getDegree());
+              result.terms.next().setDegree(holdDegree);
           }
         }
         return other;

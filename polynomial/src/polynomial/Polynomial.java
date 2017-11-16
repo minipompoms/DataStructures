@@ -60,32 +60,34 @@ public class Polynomial {
         }
         
         Polynomial result = new Polynomial(); //new polynomial to be returned
-        //double xCoeff = terms.next().getCoeff();
-        //int xDegree = terms.next().getDegree();
-        
-
+       
         while(terms.hasNext())
         {
             Monomial temp = terms.next();
-            Monomial otherM = other.terms.next();
-            if(temp.getDegree() == otherM.getDegree())//if exponents share same term
-            {
-                
-                temp.setCoeff(temp.getCoeff()+ otherM.getCoeff()); //keep track of exponents
-                result.addTerm(temp); //add terms to result      
-                System.out.println("new Poly: "+result.toString());
+            Monomial oPoly = other.terms.next(); //to hold terms of other polynomial
+            
+            if(temp.getDegree() == oPoly.getDegree())//if exponents share same term
+            {                
+                temp.setCoeff(temp.getCoeff()+ oPoly.getCoeff()); //assign coefficient 
+                result.addTerm(temp); //add terms to result 
+               
             }
             
-          else if(temp.getDegree()<other.terms.next().getDegree()) //check for lesser degree of the two
-          {
-              result.terms.next().setDegree(terms.next().getDegree()); //update the result 
-          }
-          else 
-          {
-              result.terms.next().setDegree(temp.getDegree());
-          }
+            else if(temp.getDegree() < oPoly.getDegree() || temp.getDegree()> oPoly.getDegree()) //check for lesser degree of the two
+            {
+              result.addTerm(oPoly);
+              result.addTerm(temp); //update the new polynomial to include the terms
+
+            }
+//            else 
+//            {
+//              result.addTerm(temp);
+//              System.out.println("x: "+result.toString());
+//
+//            }
         }
-        return result;
+    return result;
+
     }
  
     /**

@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     
     private Node<Type> head; //node
+   
     
     /**
      *constructor
@@ -46,20 +47,18 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
         {          
             while(current != null)
             {
-                if (info.compareTo(current.info)<0)//will now check for insertion after 
+                if (info.compareTo(current.info)<0) //will now check for insertion after 
                 {
-                break;
+                    break;
                 }
-                previous = current;
-                current = current.next;
                 
+                previous = current;
+                current = current.next;               
             }
             
             newNode.next = previous.next; //insert item 
-            previous.next = newNode;
-            
-        }
-                                        
+            previous.next = newNode;            
+        }                                        
     }
     /**
      * remove the node holding value Type
@@ -102,7 +101,8 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     public void setFirst() 
     {        
        
-       Node<Type> temp = head; 
+         
+
         
         
     }
@@ -136,14 +136,15 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
     @Override
     public Type next() 
     {
-        if (hasNext())
-        {
-            Type next = head.getInfo();
-            head = head.next;
-            return next;
-        }
-        else 
-            throw new NoSuchElementException("no such element"); 
+        if (!hasNext())
+            throw new NoSuchElementException("no such element");
+     
+        Type data = head.getInfo();
+        head = head.next;
+        return data;
+        
+        
+             
     }
        
     @Override
@@ -172,11 +173,11 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
        
        
 // <editor-fold defaultstate="collapsed" desc="constructor, getters, and setters">
-       public Node(Type info)
+       public Node(Type data)
        {
-           this.info = info;
-           this.prev = prev;
-           this.next = next;         
+           this.info = data;
+           this.next = null;   
+           this.prev = null;
        }
        
        public void setPrev(Node <Type> node)
@@ -204,9 +205,7 @@ public class SDLLC <Type extends Comparable <Type>> implements SDLLI<Type> {
            return info;
        }    
          // </editor-fold>
-       
-       
-     
+   
     } 
        // </editor-fold>
 }

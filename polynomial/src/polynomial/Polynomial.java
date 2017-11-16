@@ -67,13 +67,11 @@ public class Polynomial {
         while(terms.hasNext())
         {
             Monomial temp = terms.next();
-            System.out.println("temp: exp "+temp.getDegree()+" coeff: "+temp.getCoeff());
-
-            if(temp.getDegree() == other.terms.next().getDegree())//if exponents share same term
+            Monomial otherM = other.terms.next();
+            if(temp.getDegree() == otherM.getDegree())//if exponents share same term
             {
                 
-                //temp.setDegree(xDegree); //keep track of exponents
-                System.out.println("polyDegree: "+temp.getDegree());
+                temp.setCoeff(temp.getCoeff()+ otherM.getCoeff()); //keep track of exponents
                 result.addTerm(temp); //add terms to result      
                 System.out.println("new Poly: "+result.toString());
             }

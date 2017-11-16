@@ -60,35 +60,34 @@ public class Polynomial {
         }
         
         Polynomial result = new Polynomial(); //new polynomial to be returned
+        //double xCoeff = terms.next().getCoeff();
+        //int xDegree = terms.next().getDegree();
         
-        
-        while(terms!= null)
+
+        while(terms.hasNext())
         {
-            
-            int holdDegree = terms.next().getDegree();
-           
-            int polyDegree = other.terms.next().getDegree();
-            //double holdCoeff = terms.next().getCoeff();
-            //double polyCoeff = other.terms.next().getCoeff();
-            //Monomial temp = new Monomial(holdDegree, holdCoeff);
-            
-            if(holdDegree == polyDegree)//if exponents share same term
+            Monomial temp = terms.next();
+            System.out.println("temp: exp "+temp.getDegree()+" coeff: "+temp.getCoeff());
+
+            if(temp.getDegree() == other.terms.next().getDegree())//if exponents share same term
             {
-                //temp.setDegree(holdDegree+polyDegree); //keep track of exponents
                 
-               // result.terms.next().setDegree(holdDegree); //add terms to result                        
+                //temp.setDegree(xDegree); //keep track of exponents
+                System.out.println("polyDegree: "+temp.getDegree());
+                result.addTerm(temp); //add terms to result      
+                System.out.println("new Poly: "+result.toString());
             }
             
-          else if(holdDegree<polyDegree) //check for lesser degree of the two
+          else if(temp.getDegree()<other.terms.next().getDegree()) //check for lesser degree of the two
           {
               result.terms.next().setDegree(terms.next().getDegree()); //update the result 
           }
           else 
           {
-              result.terms.next().setDegree(holdDegree);
+              result.terms.next().setDegree(temp.getDegree());
           }
         }
-        return other;
+        return result;
     }
  
     /**

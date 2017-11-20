@@ -24,7 +24,7 @@ public class Monomial implements Comparable<Monomial>{
     {
         if (degree < 0)
         {
-            throw new IllegalArgumentException("Invalid: exponent must be positive");
+            throw new IllegalArgumentException("Invalid Entry: exponent must be positive");
         }
         this.degree = degree;
         this.coeff = coeff;       
@@ -71,25 +71,23 @@ public class Monomial implements Comparable<Monomial>{
     {
         return degree == other.degree && coeff == other.coeff;
     }
+    
+    public boolean isEquivlent(Monomial other)
+    {
+        return degree == other.degree;
+       
+    }
 
     /**
      *
      * @param other
-     * @return
+     * @returns 
      */
     @Override
     public int compareTo(Monomial other) 
     {   
-      if (this.degree > other.degree)
-      {
-          return -1;
-      }
-      else if (degree < other.degree)
-      {
-          return 1;
-      }
-       else
-          return 0;  
+        Integer exp = other.degree;       
+        return exp.compareTo(this.degree); 
     }
     
     @Override
@@ -97,7 +95,7 @@ public class Monomial implements Comparable<Monomial>{
     {
         
         StringBuilder ts = new StringBuilder();
-        ts.append(": ");
+        ts.append(" : ");
       
         ts.append(this.coeff).append("x^").append(this.degree);
 //        if (this.coeff ==1)
@@ -113,7 +111,7 @@ public class Monomial implements Comparable<Monomial>{
 //            ts.append(this.coeff);
 //            ts.append("x^").append(this.degree).append(" ");
 //        }
-        ts.append(" :");
+        ts.append(" : ");
         return ts.toString();
     }  
 }

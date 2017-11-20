@@ -11,38 +11,39 @@ package polynomial;
  */
 public class PolynomialApp  {
     
-    public static void main (String[] args)
+    public static void main (String[] args) throws NotFoundException
     {
         
         Polynomial p1 = new Polynomial();
         Polynomial p2 = new Polynomial();
-       
         Polynomial p3 = new Polynomial();
-        Monomial m = new Monomial(3,4);
-       //p2.addTerm(new Monomial(2,4));
-       
-       p1.addTerm(new Monomial(2,5));
-       
-       
-       //System.out.println(p1.terms.toString());
+        
       
-       p2.addTerm(m);
+       p2.addTerm(new Monomial (3,3));
+       p2.addTerm(new Monomial(4,6));
+       p2.addTerm(new Monomial(2,5));
+       p2.addTerm(new Monomial(1,1));
+       p2.addTerm(new Monomial (5,9));
        
-       p3.addTerm(new Monomial(4,1));
-       
+       p1.addTerm(new Monomial(4,2));
+       p3.addTerm(new Monomial (2,2));
        p3.addTerm(new Monomial(4,3));
-       p3.addTerm(new Monomial(4,4));
-       //System.out.println(p3.toString());
-       p2.sum(p3);
-       System.out.println(p3.toString());
+       p3.addTerm(new Monomial (2,2));
+       p3.addTerm(new Monomial(4,7));
+       p3.addTerm(new Monomial(4,1));
+       System.out.println(p1.toString()+ p3);
+       Polynomial sum = p1.sum(p3);
+       //System.out.println(sum);
+
        
-       //p2.sum(p3);
-       //Polynomial constant = p2.constantProduct(2);
-       //p1.constantProduct(2);
-       //System.out.println(p2.toString());
- 
-        //System.out.println(constant.toString());
-        //System.out.println(p1.toString());
+      System.out.println("sum"+sum);
+
+       //Polynomial constant = p1.constantProduct(4);
+       //System.out.println(constant);
+        //p3.timesConstant(2);
+        //System.out.println(p3);
+       // Polynomial product = p1.product(p2);
+        //System.out.println(product);
         //System.out.println(p2.toString());
 
         

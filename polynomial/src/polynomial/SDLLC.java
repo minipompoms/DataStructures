@@ -24,6 +24,7 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
 	head = new Node<>(null);
 	head.setNext(head);
 	head.setPrev(head);
+        dummy = head;
     }
     /**
      * insert a node with info of type Type into the list
@@ -32,8 +33,7 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
     @Override
     public void insert(Type info) 
     {
-	System.out.println("inserting: " + info);
-		
+	//System.out.println("inserting: " + info);	
 	Node<Type> newNode = new Node<>(info);	
 	Node<Type> current = head.next;
 	Node<Type> previous = head;
@@ -43,7 +43,6 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
 	{
             head = new Node<>(info);
 	}
-
 	 
         else if (info.compareTo(head.info) < 0) // checks the position 
         {		
@@ -74,6 +73,7 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
             newNode.prev = previous;    
             previous.next = newNode;   
 		}
+        dummy = head;
 	}
 
 /**
@@ -141,6 +141,11 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
     @Override
     public boolean hasNext() 
     {
+        if(dummy == null)
+        {
+            dummy = head;
+            return false; 
+        }
         return dummy != null;
     }
 
@@ -152,13 +157,12 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
     */
     @Override
     public Type next() 
-    {
-        
+    {        
         if (!hasNext())
             throw new NoSuchElementException("no such element");
 
-        Type data = head.getInfo();
-        dummy = head.next;
+        Type data = dummy.getInfo();
+        dummy = dummy.next;
         return data;
     }
 

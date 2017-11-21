@@ -65,61 +65,61 @@ public class Polynomial {
        
        //Polynomial result = new Polynomial(); //new polynomial to be returned
        Polynomial result = new Polynomial();
-       System.out.println("R1:"+result);
-       
-           result.addTerm(terms.next());
-           
-       
-       System.out.println("R2:"+result);
+//       System.out.println("R1:"+result);
+//       
+//           result.addTerm(terms.next());
+//           
+//       
+//       System.out.println("R2:"+result);
        //likeTerms(result);
        
       // other.likeTerms();
-//        while(terms.hasNext())
-//        {
-//            
-//            Monomial temp = terms.next();
-//            Monomial m = temp; 
-//            //System.out.println("From tom - temp value:"+temp);
-//            //System.out.println("poly value:"+ poly);
-//            //System.out.println("m value :"+m+"\n");
-//            while(other.terms.hasNext())
-//            {
-//            Monomial poly = other.terms.next(); //to hold terms of other polynomial
-//           
-//            if(temp.isEquivlent(poly))//if exponents share same term
-//            {   
-//                
-//                
-//                poly.setCoeff(m.getCoeff()+poly.getCoeff()); //assign coefficient 
-//                poly.setDegree(poly.getDegree()); //assign degree
-//               
-////                System.out.println("temp value:"+temp);
-////                System.out.println("poly value:"+ poly);
-////                System.out.println("m value :"+m+"\n");
-//               
-//                m.setCoeff(0);
-//                m.setDegree(0);
-//                temp = poly;  //set value to next
-//       
-//                result.addTerm(poly); //add value to new polynomial list
-//                
-//
-//            }
-//            
-//           if(!temp.isEquivlent(poly)) //to check if exponents are not a match
-//            {    
-//              result.addTerm(poly); //update the new polynomial to include the terms             
-//              //result.addTerm(temp);
-//              temp = poly;
-//              
-//            
-//            }
-//            
-//            
-//            }
-//       
-//            
-//        }
+        while(terms.hasNext())
+        {
+            
+            Monomial temp = terms.next();
+            Monomial m = temp; 
+            //System.out.println("From tom - temp value:"+temp);
+            //System.out.println("poly value:"+ poly);
+            //System.out.println("m value :"+m+"\n");
+            while(other.terms.hasNext())
+            {
+            Monomial poly = other.terms.next(); //to hold terms of other polynomial
+           
+            if(temp.isEquivlent(poly))//if exponents share same term
+            {   
+                
+                
+                poly.setCoeff(m.getCoeff()+poly.getCoeff()); //assign coefficient 
+                poly.setDegree(poly.getDegree()); //assign degree
+               
+//                System.out.println("temp value:"+temp);
+//                System.out.println("poly value:"+ poly);
+//                System.out.println("m value :"+m+"\n");
+               
+                m.setCoeff(0);
+                m.setDegree(0);
+                temp = poly;  //set value to next
+       
+                result.addTerm(poly); //add value to new polynomial list
+                
+
+            }
+            
+           if(!temp.isEquivlent(poly)) //to check if exponents are not a match
+            {    
+              result.addTerm(poly); //update the new polynomial to include the terms             
+              //result.addTerm(temp);
+              temp = poly;
+              
+            
+            }
+            
+            
+            }
+       
+            
+        }
     return result;
     }
  

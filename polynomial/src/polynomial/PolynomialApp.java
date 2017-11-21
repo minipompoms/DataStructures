@@ -35,12 +35,18 @@ public class PolynomialApp  {
        p3.addTerm(new Monomial (2,2));
        p3.addTerm(new Monomial(4,7));
        p3.addTerm(new Monomial(4,1));
+       
        System.out.println("SUM:"+p3);
        System.out.println("+\n"+p1);
-       Polynomial sum = p1.sum(p3);
-       //System.out.println(sum);
        
-      System.out.println("sum"+sum);
+       Polynomial sum = new Polynomial();
+       Polynomial z = sum.likeTerms(p3);
+       
+        System.out.println("likeTerms:"+z);
+       Polynomial s = p1.sum(z);
+      
+       
+      System.out.println("sum"+s);
       //p1.likeTerms(p2);
       Polynomial p = new Polynomial();
       Polynomial x =  p.likeTerms(p2);

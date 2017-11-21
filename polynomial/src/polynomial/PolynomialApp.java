@@ -18,12 +18,16 @@ public class PolynomialApp  {
         Polynomial p2 = new Polynomial();
         Polynomial p3 = new Polynomial();
         
-      
-       p2.addTerm(new Monomial (3,3));
-       p2.addTerm(new Monomial(4,6));
-       p2.addTerm(new Monomial(2,5));
-       p2.addTerm(new Monomial(1,1));
-       p2.addTerm(new Monomial (5,9));
+       p2.addTerm(new Monomial(3,3));
+       p2.addTerm(new Monomial (4,4));
+       p2.addTerm(new Monomial (4,4));
+       p2.addTerm(new Monomial(3,3));
+       p2.addTerm(new Monomial(4,8));
+       //System.out.println(p2);
+
+//       p2.addTerm(new Monomial(1,1));
+//       p2.addTerm(new Monomial(6,3));
+//       p2.addTerm(new Monomial (2,3));
        
        p1.addTerm(new Monomial(4,2));
        p3.addTerm(new Monomial (2,2));
@@ -31,13 +35,17 @@ public class PolynomialApp  {
        p3.addTerm(new Monomial (2,2));
        p3.addTerm(new Monomial(4,7));
        p3.addTerm(new Monomial(4,1));
-       System.out.println(p1.toString()+ p3);
+       System.out.println("SUM:"+p3);
+       System.out.println("+\n"+p1);
        Polynomial sum = p1.sum(p3);
        //System.out.println(sum);
-
        
       System.out.println("sum"+sum);
-
+      //p1.likeTerms(p2);
+      Polynomial p = new Polynomial();
+      Polynomial x =  p.likeTerms(p2);
+       
+      System.out.println("likeTerms:"+x);
        //Polynomial constant = p1.constantProduct(4);
        //System.out.println(constant);
         //p3.timesConstant(2);

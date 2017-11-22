@@ -17,48 +17,42 @@ public class PolynomialApp  {
         Polynomial p1 = new Polynomial();
         Polynomial p2 = new Polynomial();
         Polynomial p3 = new Polynomial();
-        
-       p2.addTerm(new Monomial(3,3));
-       p2.addTerm(new Monomial (4,4));
-       p2.addTerm(new Monomial (4,4));
-       p2.addTerm(new Monomial(3,3));
-       p2.addTerm(new Monomial(4,8));
-       //System.out.println(p2);
-
-//       p2.addTerm(new Monomial(1,1));
-//       p2.addTerm(new Monomial(6,3));
-//       p2.addTerm(new Monomial (2,3));
+        Polynomial p4 = new Polynomial();
+        p2.addTerm(new Monomial(1,1));
+        p2.addTerm(new Monomial(3,6)); 
+        p2.addTerm(new Monomial(2,2));
+        p2.addTerm(new Monomial(4,3));
+    
        
-       p1.addTerm(new Monomial(4,2));
-       p3.addTerm(new Monomial (2,2));
+       p2.addTerm(new Monomial(2,8));
+       p2.addTerm(new Monomial(1,1));
+       p2.addTerm(new Monomial(2,1));
+       p2.addTerm(new Monomial(1,11));
+       p2.addTerm(new Monomial(2,9));
+       
+         //System.out.println("list 4 :"+p4);
+         System.out.println("list 2 :"+p2);
+       Polynomial x;
+       x = p2.likeTerms(p2);
+       
+       System.out.println("like Terms: "+x);
+       
+       p3.addTerm(new Monomial (2,8));
        p3.addTerm(new Monomial(4,3));
        p3.addTerm(new Monomial (2,2));
-       p3.addTerm(new Monomial(4,7));
-       p3.addTerm(new Monomial(4,1));
+       p3.addTerm(new Monomial(0,4));
+       p3.addTerm(new Monomial(1,1));
        
-       System.out.println("SUM:"+p3);
-       System.out.println("+\n"+p1);
-       
-       Polynomial sum = new Polynomial();
-       Polynomial z = sum.likeTerms(p3);
-       
-        System.out.println("likeTerms:"+z);
-       Polynomial s = p1.sum(z);
-      
-       
-      System.out.println("sum"+s);
-      //p1.likeTerms(p2);
-      Polynomial p = new Polynomial();
-      Polynomial x =  p.likeTerms(p2);
-       
-      System.out.println("likeTerms:"+x);
-       //Polynomial constant = p1.constantProduct(4);
-       //System.out.println(constant);
-        //p3.timesConstant(2);
-        //System.out.println(p3);
-       // Polynomial product = p1.product(p2);
-        //System.out.println(product);
-        //System.out.println(p2.toString());
+//       
+//       System.out.println("list 1 :"+p1);
+//       //System.out.println("list 2 :"+p2);
+//       System.out.println("list 3 :"+p3);
+//       Polynomial s;
+//       s = p3.sum(p1);
+//       System.out.println("sum of list 3 & 1 :"+s);
+//       //Polynomial p;
+       //p = p1.sum(p2);
+       //System.out.println("sum of list 1 & 2: "+p);
 
         
     }

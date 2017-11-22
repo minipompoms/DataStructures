@@ -132,24 +132,33 @@ public class Polynomial {
      * multiplies given instance by another polynomial
      * @param other
      * @return new polynomial value
+     * @throws polynomial.NotFoundException
      */
-    public Polynomial product(Polynomial other)
+    public Polynomial product(Polynomial other) throws NotFoundException
     {
-        Polynomial p = new Polynomial();
+        Polynomial poly = new Polynomial();
      
         while (terms.hasNext())
         {           
-            Monomial m = terms.next(); //retrieve values
-                    
-            double coeff = m.getCoeff();
-            int exponent = m.getDegree();
-            
-            m.setCoeff(coeff); //set values
-            m.setDegree(exponent);  
-           
-            p.addTerm(new Monomial(exponent, coeff));           
+            Monomial m = terms.next(); //retrieve & hold values of first LL
+            int exp = m.getDegree();
+            double coeff = m.getCoeff(); //holds the values in order to reset
+                         
+            while(other.terms.hasNext())
+            {
+                Monomial o = other.terms.next();   //retrieve & hold value of other LL
+                Monomial term = new Monomial(1,1); //temp monomial to hold insert term
+              
+                term.setCoeff(coeff*=o.getCoeff());
+                term.setDegree(exp+=o.getDegree());
+                poly.addTerm(term);             //add the product to the new list
+                coeff = m.getCoeff();
+                exp = m.getDegree();
+             
+            }             
         }
-        return other;
+        poly = likeTerms(poly);
+        return poly;
     }
     
     /**

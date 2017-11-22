@@ -22,13 +22,9 @@ public class Monomial implements Comparable<Monomial>{
      */
     public Monomial(int degree, double coeff) 
     {
-        if (degree < 0)
+        if (degree < 0 || coeff < 1)
         {
             throw new IllegalArgumentException("Invalid Entry: exponent must be positive");
-        }
-        if (coeff == 0)
-        {
-            coeff = 1;
         }
         this.degree = degree;
         this.coeff = coeff;       

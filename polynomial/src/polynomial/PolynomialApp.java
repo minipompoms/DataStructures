@@ -19,19 +19,18 @@ public class PolynomialApp  {
        
        
        p1.addTerm(new Monomial(4,4));
-       p1.addTerm(new Monomial(1,8));
-       p1.addTerm(new Monomial(2,3));
+       p1.addTerm(new Monomial (3,4));
        
-       p2.addTerm(new Monomial(1,11));
-       p2.addTerm(new Monomial(2,9));
-       p2.addTerm(new Monomial(1,1));
-       p2.addTerm(new Monomial(3,6)); 
-       p2.addTerm(new Monomial(2,2));
        p2.addTerm(new Monomial(4,3));
-       
+       p2.addTerm(new Monomial(2,3));
+       p2.addTerm(new Monomial(1,1));
+      
+       System.out.println(p2);
        System.out.println(p1);
-       p1.product(p2);
-       System.out.println(p1);
+       Polynomial product = p1.product(p2);
+       System.out.println("product "+product);
+    
+
    
       
     

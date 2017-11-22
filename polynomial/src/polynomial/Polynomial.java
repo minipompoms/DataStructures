@@ -38,99 +38,47 @@ public class Polynomial {
      * to add another polynomial to the given instance
      * @throws polynomial.NotFoundException
      */ 
-    public void addition(Polynomial other) throws NotFoundException
+    public void addition(Polynomial other) throws NotFoundException 
     {
-         if (terms == null)
+        
+        if (terms == null)
         {
-            throw new IllegalArgumentException("empty list");
+            throw new IllegalArgumentException("cannot add an empty list");
         }
-       sum(other); //adds values by calling sum method
        
-        //calls list and modifies 
-       
+        Polynomial x = sum(other);      
+        other.terms = x.terms;
+
     }
     
     /**
      * 
      * @param other
      * @return sum of polynomials, original remains unaltered
-     * 
+     * @throws polynomial.NotFoundException
      */
     public Polynomial sum(Polynomial other) throws NotFoundException 
     {
         if (terms == null)
         {
-            throw new IllegalArgumentException("empty list");
+            throw new IllegalArgumentException("Cannot add an empty list");
         }
        
        Polynomial result; //new polynomial to be returned
        
-       Polynomial x = new Polynomial();
+       Polynomial x = new Polynomial(); //holds values to keep traversing
+    
        while (other.terms.hasNext())
        {
-           x.addTerm(other.terms.next());
-           
-       
+           x.addTerm(other.terms.next());      
        }
-       //x = likeTerms(x);
-                while(terms.hasNext())
+
+       while(terms.hasNext())
        {
            x.addTerm(terms.next());
        }
-       
-     
-      
+   
        result = likeTerms(x);
-       
-         System.out.println("after like terms: " +x);
-       
-
-//        while(terms.hasNext())
-//        {
-//            
-//            Monomial temp = terms.next();
-//            Monomial m = temp; 
-//            //System.out.println("From tom - temp value:"+temp);
-//            //System.out.println("poly value:"+ poly);
-//            //System.out.println("m value :"+m+"\n");
-//            while(other.terms.hasNext())
-//            {
-//            Monomial poly = other.terms.next(); //to hold terms of other polynomial
-//           
-//            if(temp.isEquivlent(poly))//if exponents share same term
-//            {   
-//                
-//                
-//                poly.setCoeff(m.getCoeff()+poly.getCoeff()); //assign coefficient 
-//                poly.setDegree(poly.getDegree()); //assign degree
-//               
-////                System.out.println("temp value:"+temp);
-////                System.out.println("poly value:"+ poly);
-////                System.out.println("m value :"+m+"\n");
-//               
-//                m.setCoeff(0);
-//                m.setDegree(0);
-//                temp = poly;  //set value to next
-//       
-//                result.addTerm(poly); //add value to new polynomial list
-//                
-//
-//            }
-//            
-//           if(!temp.isEquivlent(poly)) //to check if exponents are not a match
-//            {    
-//              result.addTerm(poly); //update the new polynomial to include the terms             
-//              //result.addTerm(temp);
-//              temp = poly;
-//              
-//            
-//            }
-//            
-//            
-//            }
-//       
-//            
-//        }
     return result;
     }
  
@@ -140,7 +88,7 @@ public class Polynomial {
      */
     public void timesConstant(double constant)           
     {
-        //fix here
+        
         Polynomial p = constantProduct(constant);
          while(terms.hasNext())
          {
@@ -151,10 +99,9 @@ public class Polynomial {
             coeff*=constant; //multiply constant by value 
             m.setCoeff(coeff); //set values
             m.setDegree(exponent);  
-            p.addTerm(new Monomial(exponent, coeff)); //apply to the new instance
+            p.addTerm(new Monomial(exponent, coeff)); //apply & changes values
          }
-                
-        
+
     }
     
     /**
@@ -168,15 +115,16 @@ public class Polynomial {
         
          while(terms.hasNext())
          {
+             
             Monomial m = terms.next(); //retrieve values
             double coeff = m.getCoeff();
             int exponent = m.getDegree();    
             coeff *= constant; //multiply constant by value 
-            m.setCoeff(coeff); //set values
-            m.setDegree(exponent);  
-            p.addTerm(new Monomial(exponent, coeff)); //apply to the new instance
-         }
+            Monomial temp = new Monomial(exponent,coeff); //create new monomial for insertion          
+            p.addTerm(temp); //apply to the new instance
          
+         }
+        
       return p;//product is returned    
     }    
     
@@ -188,7 +136,7 @@ public class Polynomial {
     public Polynomial product(Polynomial other)
     {
         Polynomial p = new Polynomial();
-       //fix algorithm
+     
         while (terms.hasNext())
         {           
             Monomial m = terms.next(); //retrieve values
@@ -204,21 +152,24 @@ public class Polynomial {
         return other;
     }
     
+    /**
+     * combines like terms
+     * @param other
+     * @return new polynomial with combined like terms 
+     * @throws NotFoundException
+     */
     public Polynomial likeTerms(Polynomial other) throws NotFoundException
     {
-         
-  
-        Polynomial x = new Polynomial();
-        Monomial monomial = other.terms.next();
-        Monomial temp = null; //holds last value
+        
+        Polynomial result = new Polynomial();   //polynomial to be returned
+        Monomial monomial = other.terms.next(); //to hold monomial 
+        Monomial temp = null;                   //to hold last value
         double coeff = monomial.getCoeff();
-        int exp = monomial.getDegree();
-       
-        
-        
+        int exp = monomial.getDegree();         //holds values for iteration
+     
         while (other.terms.hasNext()) //if there are terms in polynomial
         {   
-           
+          
            Monomial m = other.terms.next(); //checks next monomial
               
            if(m.getDegree() == exp) //check if they're a match
@@ -226,28 +177,31 @@ public class Polynomial {
                 coeff +=m.getCoeff(); //add the coefficents to combine               
            }  
       
-        monomial.setCoeff(coeff);
-        monomial.setDegree(exp);
-       
+        monomial.setCoeff(coeff); 
+        monomial.setDegree(exp);  //assign values, prepare to check next element
+      
          
-            if (m.getDegree()!= exp)
+            if (m.getDegree()!= exp) //if degree is no match to previous value
             {
                
-                x.addTerm(monomial);        
-                coeff = m.getCoeff();
-                monomial = m;
+                result.addTerm(monomial); //list is sorted, so add monomial to new list       
+                coeff = m.getCoeff(); //assign coeff to current coeff
+                monomial = m; //
                 m = monomial;
                 exp = monomial.getDegree();
 
             if (monomial.isEquivlent(m))
             {
-                temp = m;             
+                temp = m;  
+              
             }               
             }
-   
+            
+ 
         }
-        x.addTerm(temp);
-        return x;
+        result.addTerm(temp);
+   
+        return result;
     }
     
     
@@ -262,9 +216,8 @@ public class Polynomial {
         }
         else           
             while (terms.hasNext())
-            {
-            
-            ts.append(terms.next()).append("  ");           
+            {    
+                ts.append(terms.next()).append("  ");           
             }
         return ts.toString();
     }

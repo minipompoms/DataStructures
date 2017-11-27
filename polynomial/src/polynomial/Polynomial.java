@@ -44,10 +44,15 @@ public class Polynomial {
         if (terms == null) //throws an exception if input is empty
         {
             throw new IllegalArgumentException("cannot add an empty list");
-        }    
-             Polynomial s = sum(other);    
-             s.terms = other.terms;
+        }   
+        Polynomial a = new Polynomial();
+        a.terms = other.terms;
+        Polynomial b = new Polynomial();
+        b.terms = terms;
+       
+             Polynomial s = sum(a);    
 
+             other.terms = s.terms; //reassigns given instance with summed values
     }
     
     /**
@@ -62,23 +67,28 @@ public class Polynomial {
         {
             throw new IllegalArgumentException("Cannot add an empty list");
         }
-        
-       Polynomial result; //new polynomial to be returned
-       
-       Polynomial x = new Polynomial(); //holds values to keep traversing
-    
-       while (other.terms.hasNext()) //while traversing other polynomial
+        Polynomial a = new Polynomial();
+        a.terms = other.terms;
+        Polynomial b = new Polynomial();
+        b.terms = terms;
+      
+       Polynomial x = new Polynomial(); //new polynomial to be returned
+      
+        while(a.terms.hasNext()) //while traversing other polynomial
        {
-           x.addTerm(other.terms.next());  //add values to the temp polynomial    
+           x.addTerm(a.terms.next());  //add values to the temp polynomial    
        }
 
-       while(terms.hasNext()) //traverse values in current polynomial
-       {
-           x.addTerm(terms.next()); //adds value to temp
+        while(b.terms.hasNext()) //traverse values in current polynomial
+       {       
+           x.addTerm(b.terms.next());         
        }
-   
-       result = likeTerms(x); //assigns values in polynomial to be returned
-    return result; 
+       
+        //other.terms = a.terms;
+        //terms = b.terms; //reassigns original values to copies
+        x = likeTerms(x);
+        
+        return x; 
     }
  
     /**

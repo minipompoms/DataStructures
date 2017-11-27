@@ -78,49 +78,63 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
 
 /**
 * remove the node holding value Type
-* 
 * @param info - Type value to be removed
-* 
 * @return boolean true if removed, false, if no such value in the list
 * @throws polynomial.NotFoundException
 */
     @Override
     public boolean remove(Type info) throws NotFoundException 
     {
-	Node<Type> current;
-	current = head.getNext();
+	Node<Type> current = head.getNext();
 	Node<Type> previous = head;
-
-	while (current != null) 
+      
+        while (current != null) 
         {
-            if (current.getInfo().compareTo(info) == 0)// if data is a match
+
+            if (previous.getInfo().compareTo(info) == 0)// if data is a match
             {
-		previous.setNext(current.getNext()); // remove current node
-		return true;
-	    } else 
+               if(previous!=head)
+               {
+                    previous.prev.setNext(current); //set head to current 
+                    return true;
+               }
+               if(current.info.compareTo(info) == 0)
+               {
+                   head = head.next;
+                   dummy = head;
+                   return true;
+               }              
+	    } 
+            else 
                 {
                     if (current.getInfo().compareTo(info) > 0)// past location of											// value so no match
                     {
 			throw new NotFoundException(); // item not found
                     }
 		}
-		// moves to next node
-		previous = current;
-		current = current.getNext();
+                    // moves to next node
+                    previous = current;
+                    current = current.getNext();
+                    
 		}
-		throw new NotFoundException();
-	}
-
+        
+        throw new NotFoundException("Item not found");
+	
+    }
+    
     /**
     * initialize the list for a subsequent call to next
-    */
+    */    
     @Override
     public void setFirst() 
     {
-        Node<Type> current = head;
-
+       
     }
 
+    /**
+     *
+     * @return
+     */
     public int size() 
     {
 	int count = 0;

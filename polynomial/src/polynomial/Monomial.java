@@ -13,6 +13,7 @@ public class Monomial implements Comparable<Monomial>{
     
     private int degree; //degree of the term
     private double coeff; //coefficient of the term
+    
   
     
     /**
@@ -22,12 +23,12 @@ public class Monomial implements Comparable<Monomial>{
      */
     public Monomial(int degree, double coeff) 
     {
-        if (degree < 0 || coeff < 1)
+        if (degree < 0)
         {
             throw new IllegalArgumentException("Invalid Entry: exponent must be positive");
         }
         this.degree = degree;
-        this.coeff = coeff;       
+        this.coeff = coeff;
     }
 
     /**
@@ -65,13 +66,22 @@ public class Monomial implements Comparable<Monomial>{
     {
         this.coeff = coeff;
     }
-    
- 
+   
+    /**
+     *
+     * @param other
+     * @return
+     */
     public boolean equals(Monomial other) 
     {
         return degree == other.degree && coeff == other.coeff;
     }
     
+    /**
+     *
+     * @param other
+     * @return
+     */
     public boolean isEquivlent(Monomial other)
     {
         return degree == other.degree;
@@ -95,23 +105,10 @@ public class Monomial implements Comparable<Monomial>{
     {
         
         StringBuilder ts = new StringBuilder();
-        ts.append(" : ");
-      
+        ts.append(" ");
+        
         ts.append(this.coeff).append("x^").append(this.degree);
-//        if (this.coeff ==1)
-//        {    
-//            if (this.degree == 1)
-//            {
-//                ts.append(this.coeff);
-//            }
-//            ts.append("x").append("^").append(this.degree);
-//        }
-//        else if (this.degree > 1)         
-//        {
-//            ts.append(this.coeff);
-//            ts.append("x^").append(this.degree).append(" ");
-//        }
-        ts.append(" : ");
+        
         return ts.toString();
     }  
 }

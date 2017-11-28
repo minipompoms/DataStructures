@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
 
     private Node<Type> head; // node
-    private Node<Type> dummy;
+    private Node<Type> dummy; //dummy node to traverse list
     /**
      * constructor
      */
@@ -28,12 +28,12 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
     }
     /**
      * insert a node with info of type Type into the list
-     * @param info
+     * @param info Type info to be inserted
      */
     @Override
     public void insert(Type info) 
     {
-	//System.out.println("inserting: " + info);	
+		
 	Node<Type> newNode = new Node<>(info);	
 	Node<Type> current = head.next;
 	Node<Type> previous = head;
@@ -44,7 +44,7 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
             head = new Node<>(info);
 	}
 	 
-        else if (info.compareTo(head.info) < 0) // checks the position 
+        else if (info.compareTo(head.info) < 0) // checks the list for position of insertion
         {		
            
             newNode.next = head;  // insertion before
@@ -59,20 +59,19 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
             {
 	    
 		if (info.compareTo(current.info) <= 0) //if current term is less than or equal to 
-                                            //to new node, stop so newNode can be inserted 
-		{
-		// will now check for// insertion after			
-                    break;
+                                                       //to new node, insert here
+		{				
+                    break; // will now check for insertion after	
 		}
-		// "Increment" references 
-                    previous = current;
+		 
+                    previous = current; // increment references
                     current = current.next;
 		}
 			
-            newNode.next = previous.next; //insert item - will be null, if appending to end of list ... 
+            newNode.next = previous.next; //insert item, will be null, if appending to end of list 
             newNode.prev = previous;    
             previous.next = newNode;   
-		}
+	}
         dummy = head;
 	}
 
@@ -98,10 +97,10 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
                     previous.prev.setNext(current); //set head to current 
                     return true;
                }
-               if(current.info.compareTo(info) == 0)
+               if(current.info.compareTo(info) == 0) 
                {
                    head = head.next;
-                   dummy = head;
+                   dummy = head; 
                    return true;
                }              
 	    } 
@@ -111,15 +110,12 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
                     {
 			throw new NotFoundException(); // item not found
                     }
-		}
-                    // moves to next node
-                    previous = current;
-                    current = current.getNext();
-                    
+		}                    
+                    previous = current;     // move to next node
+                    current = current.getNext();                   
 		}
         
-        throw new NotFoundException("Item not found");
-	
+        throw new NotFoundException("Item not found");	
     }
     
     /**
@@ -132,24 +128,7 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
     }
 
     /**
-     *
-     * @return
-     */
-    public int size() 
-    {
-	int count = 0;
-	Node<Type> current = head;
-	while (current.next != null) 
-        {
-            current = current.getNext();
-            count++;
-	}
-	return count;
-	}
-
-    /**
     * indicate whether a call to next will succeed
-    * 
     * @return boolean true if the current node is not null, false otherwise
     */
     @Override
@@ -166,7 +145,6 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
     /**
     * return the value of the current node of type Type and advance the current
     * node to current.getNext()
-    * 
     * @return - value held by the current node of type Type
     */
     @Override
@@ -175,8 +153,8 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
         if (!hasNext())
             throw new NoSuchElementException("no such element");
 
-        Type data = dummy.getInfo();
-        dummy = dummy.next;
+        Type data = dummy.getInfo(); //use a dummy node in place of head
+        dummy = dummy.next;         // otherwise head will be lost if once traversed
         return data;
     }
 

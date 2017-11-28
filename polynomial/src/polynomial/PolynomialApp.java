@@ -21,8 +21,8 @@ public class PolynomialApp  {
     public static void main (String[] args) throws NotFoundException
     {
        Polynomial polyA = new Polynomial(); //create instance 
-       Polynomial polyB = new Polynomial(); //for other polynomial
-       //Monomial r = new Monomial (3,6);
+       Polynomial polyB = new Polynomial(); //another for a second polynomial
+//       Monomial r = new Monomial (3,6);
 //       
 //       polyA.addTerm(new Monomial(3,4));
 //       polyA.addTerm(new Monomial(2,4));
@@ -36,12 +36,12 @@ public class PolynomialApp  {
 //       
 //        System.out.println("AfterA"+polyA);
 //       System.out.println("AfterB"+polyB);
-       //System.out.println("Sum"+S);
+//       System.out.println("Sum"+S);
 
       
        System.out.println("\tSTART");
        Scanner input = new Scanner(System.in);
-       int choice;     // menu input
+       int choice;        // menu input
        char exit = 0;     //check to continue inputs
        
        
@@ -57,7 +57,7 @@ public class PolynomialApp  {
                    {
                        Monomial m = addTerm();
                        polyA.addTerm(m);
-                       System.out.println("Insert another term or enter X to return to menu");
+                       System.out.println("Insert another term or enter x to return to menu");
                        
                        exit = input.next().charAt(0);
                        if (exit == 'x')
@@ -78,7 +78,7 @@ public class PolynomialApp  {
                    {
                        Monomial m = addTerm();                    
                        polyB.addTerm(m); 
-                       System.out.println("Insert another term or enter X to return to menu");
+                       System.out.println("Insert another term or enter x to return to menu");
                        
                        exit = input.next().charAt(0);
                        if (exit =='x')
@@ -191,15 +191,15 @@ public class PolynomialApp  {
                    System.exit(0);    
            
            }
-       }catch(IllegalArgumentException e)
+       }catch(IllegalArgumentException iae)
        {
            System.out.println("Invalid Entry: exponent must be a positive number");
        }
-        catch(NotFoundException e)
+        catch(NotFoundException nfe)
         {
             System.out.println("No such value");
         }
-       catch(NullPointerException e)
+       catch(NullPointerException npe)
        {
            System.out.println("null");
        }

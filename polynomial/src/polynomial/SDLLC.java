@@ -153,8 +153,8 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
         if (!hasNext())
             throw new NoSuchElementException("no such element");
 
-        Type data = dummy.getInfo(); //use a dummy node in place of head
-        dummy = dummy.next;         // otherwise head will be lost if once traversed
+        Type data = dummy.getInfo(); // dummy node in place of head
+        dummy = dummy.next;          // as to not unlink head when traversing
         return data;
     }
 

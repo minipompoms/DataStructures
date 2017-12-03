@@ -90,18 +90,18 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
         while (current != null) 
         {
 
-            if (previous.getInfo().compareTo(info) == 0)// if data is a match
+            if (previous.getInfo().compareTo(info) == 0)// if data in head is a match 
             {
                if(previous!=head)
                {
                     previous.prev.setNext(current); //set head to current 
                     return true;
                }
-               if(current.info.compareTo(info) == 0) 
+               if(previous.info.compareTo(info) == 0) //if data is a match somewhere in middle
                {
-                   head = head.next;
-                   dummy = head; 
-                   return true;
+                   head = head.next;    //unlink head
+                   dummy = head;        //head is reassigned 
+                   return true;     
                }              
 	    } 
             else 
@@ -114,6 +114,7 @@ public class SDLLC<Type extends Comparable<Type>> implements SDLLI<Type> {
                     previous = current;     // move to next node
                     current = current.getNext();                   
 		}
+        //if(previous.info==info)
         
         throw new NotFoundException("Item not found");	
     }

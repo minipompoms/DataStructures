@@ -22,21 +22,6 @@ public class PolynomialApp  {
     {
        Polynomial polyA = new Polynomial(); //create instance 
        Polynomial polyB = new Polynomial(); //another for a second polynomial
-//       Monomial r = new Monomial (3,6);
-//       
-//       polyA.addTerm(new Monomial(3,4));
-//       polyA.addTerm(new Monomial(2,4));
-//       polyA.addTerm(new Monomial(2,1));
-//              polyB.addTerm(new Monomial(3,3));
-//       polyB.addTerm(new Monomial(3,1));
-//       polyB.addTerm(new Monomial(3,2));
-//       System.out.println("beforeA"+polyA);
-//       System.out.println("beforeB"+polyB);
-//     polyA.addition(polyB);
-//       
-//        System.out.println("AfterA"+polyA);
-//       System.out.println("AfterB"+polyB);
-//       System.out.println("Sum"+S);
 
       
        System.out.println("\tSTART");
@@ -177,12 +162,12 @@ public class PolynomialApp  {
                    if (select.equalsIgnoreCase("a"))
                    {
                      polyA.terms.remove(toRemove);
-                       System.out.println(toRemove + "removed\n"+polyA);
+                       System.out.println(toRemove + " was removed\n\n"+polyA);
                    }
                    if (select.equalsIgnoreCase("b"))
                    {
                        polyA.terms.remove(toRemove);
-                       System.out.println(toRemove+"removed\n"+polyB);
+                       System.out.println(toRemove+" was removed\n\n"+polyB);
                    }
                        
                break;        
@@ -228,7 +213,7 @@ public class PolynomialApp  {
                            "\n0. Exit");
         answer = input.nextInt();
                 
-        while(answer < 0 || answer > 6)
+        while(answer < 0 || answer > 7)
         {
             System.out.println("PLEASE ENTER A VALID OPTION");
             answer = input.nextInt();

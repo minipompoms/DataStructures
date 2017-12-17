@@ -1,41 +1,28 @@
 package trees;
 
-// BinarySearchTree class
-//
-// CONSTRUCTION: with no initializer
-//
-// ******************PUBLIC OPERATIONS*********************
-// void insert( x )       --> Insert x
-// void remove( x )       --> Remove x
-// boolean contains( x )  --> Return true if x is present
-// Comparable findMin( )  --> Return smallest item
-// Comparable findMax( )  --> Return largest item
-// boolean isEmpty( )     --> Return true if empty; else false
-// void makeEmpty( )      --> Remove all items
-// void printTree( )      --> Print tree in sorted order
-// ******************ERRORS********************************
-// Throws UnderflowException as appropriate
 
 /**
  * Implements an unbalanced binary search tree. Note that all "matching" is
  * based on the compareTo method.
  *
  * @author Mark Allen Weiss
- *   slightly modified by akatz
+ *   slightly modified by @akatz
  * @param <AnyType>
+ * 
+ * A BinarySearchTree to handle 
+ * duplicate entries by keeping count.
+ * additional modifications by @pkohn
  */
-//Modify Weiss’s BinarySearchTree class to handle 
-//duplicate entries into the tree by keeping count 
-//of how many times each element appears. 
+
 
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 {
 
     /**
      * The tree root.
-     * It is not exposed!
      */
     private BinaryNode<AnyType> root;
+   
 
     /**
      * Construct the tree.
@@ -43,6 +30,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     public BinarySearchTree()
     {
         root = null;
+        
     }
 
     /**
@@ -125,6 +113,17 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     }
 
     /**
+     *
+     * @param x
+     * @return the duplicate count
+     */
+    public int getDuplicates(AnyType x)
+    {
+        BinaryNode <AnyType> t = root; // the node that roots the tree.
+       
+       return countDuplicates(x, t);   //returns count of duplicates
+    }
+    /**
      * Print the tree contents in sorted order.
      */
     public void printTree()
@@ -138,7 +137,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             printTree(root);
         }
     }
-
+   
     ////////////////////////////////////////////////
     //  private methods accessing tree structure  //
     ///////////////////////////////////////////////
@@ -162,19 +161,19 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         if (compareResult < 0)
         {
             t.left = insert(x, t.left);
-            
+          
         }
         else if (compareResult > 0)
         {
             t.right = insert(x, t.right);
            
+           
         }
         else if (compareResult == 0)
         {
-            t.count++; //duplicate, increase count
+            t.count++;
         }
-        //else
-        //    ;  // Duplicate; do nothing
+       
         return t;
     }
 
@@ -196,10 +195,12 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         if (compareResult < 0)
         {
             t.left = remove(x, t.left);
+           
         }
         else if (compareResult > 0)
         {
             t.right = remove(x, t.right);
+            
         }
         else if (t.left != null && t.right != null) // Two children
         {
@@ -210,6 +211,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         {
             t = (t.left != null) ? t.left : t.right;
         }
+        t.count--;
         return t;
     }
 
@@ -281,6 +283,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         }
     }
 
+  
     /**
      * Internal method to print a subtree in sorted order.
      *
@@ -291,20 +294,45 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         if (t != null)
         {
             printTree(t.left);
-            System.out.println(t.element);
+            System.out.println(t.element + " " + t.count); //revised to include count
             printTree(t.right);
+            
         }
     }
-    
+ 
  
 
-    
+  
+    /**
+     * Internal method to count duplicates.
+     *
+     * @param x is item to search for.
+     * @param t the node that roots the subtree.
+     * @return duplicate count of node containing the matched item.
+     */
+    private int countDuplicates(AnyType x, BinaryNode<AnyType> t)
+    {
+      
+        if(x.compareTo(t.element) > 0)      //will search right side for item in tree
+        {
+            return countDuplicates(x, t.right); //breaks if found
+        }
+        else if(x.compareTo(t.element) < 0) //continues searching to left
+        {
+            return countDuplicates(x, t.left); 
+        }
+        else
+            
+       return t.count; //if no match will return 1 as default
+        
+    }
+ 
 
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
         AnyType element;            // The data in the node
-        int count;                  // Keep track of the count
+        int count = 1;              // Keep track of the count
         BinaryNode<AnyType> left;   // Left child
         BinaryNode<AnyType> right;  // Right child
         
@@ -320,7 +348,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             element = theElement;
             left = lt;
             right = rt;
+            count = 1;
         }
+        
+       
         
      
     }

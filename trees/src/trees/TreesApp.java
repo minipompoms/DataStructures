@@ -1,6 +1,8 @@
 
 package trees;
 
+import java.util.*;
+
 /**
  *
  * @author pkohn
@@ -11,33 +13,56 @@ public class TreesApp {
      * 
      *@param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        BinarySearchTree<String> xTree = new BinarySearchTree();
-        
-        xTree.insert("b");
-        xTree.insert("a");
-        xTree.insert("b");
-        xTree.insert("b");
-        xTree.insert("b");
-        xTree.insert("b");
-        xTree.insert("b");
-        xTree.insert("b");
-        xTree.insert("b");
-        xTree.insert("c");
-        xTree.insert("a");
-        xTree.insert("y");
-        xTree.insert("z");
-        xTree.insert("y");
-        xTree.insert("a");
+    public static void main(String[] args) 
+    {
        
-        xTree.insert("a");
-        xTree.printTree();
-        System.out.println("duplicates of b " + xTree.getDuplicates("b"));
-        System.out.println("duplicates of a "+xTree.getDuplicates("a"));
-        System.out.println("duplicates of y " + xTree.getDuplicates("y"));
+       
+        BinarySearchTree<Character> tree = new BinarySearchTree();
+        Scanner input = new Scanner(System.in);
         
+        char ch = 1;
+        System.out.println("Enter any character, or press '0' to EXIT at anytime");
+        
+        while(ch != 0)   
+        {
+            ch = input.next().charAt(0);
+            if (ch == '0')
+            {
+                break;
+            }
+            else
+            {
+                tree.insert(ch);
+                System.out.println("Enter any character:");
+            }
+        }
+        
+           
+        System.out.println("Enter 'T' if you would like to see all values in the tree");
+        System.out.println("Enter 'V' if you would like to see specific duplicates");
+        
+        String select = input.next();
+        do{
+        if (select.equalsIgnoreCase("T"))
+        {
+            tree.printTree();
+        }
+        else if (select.equalsIgnoreCase("V"))
+        {
+            System.out.println("Enter the character to see the duplicate count");
+            ch = input.next().charAt(0);
+            System.out.println("There are " + tree.getDuplicates(ch)+
+                    " duplicates of " +ch);
+            break;
+        }
+         else
+        {
+            System.out.println("Invalid Entry: Try again");
+            select = input.next();
+        }
+        }while(!"T".equalsIgnoreCase(select)|| "V".equalsIgnoreCase(select));
+       
+ 
     }
     
 }

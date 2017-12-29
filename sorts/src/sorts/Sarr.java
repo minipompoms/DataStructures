@@ -15,12 +15,30 @@ public class Sarr
     public static void main(String[] args)
     {
 
-        testArray();
-
-//        searchArray();
+       // testArray();
+       //searchArray();
+       testBubbleSort(); 
+        
+        
+        
+        
 
     }
 
+    
+    private static void testBubbleSort()
+    {
+        int [] array = { 43, 7, 10, 23, 18, 4, 19, 5, 66, 14 };
+        System.out.println("unsorted array:");
+        showArray(array);
+        
+        int []sorted = SarrS.bubbleSort(array);
+        System.out.println("sorted array: " );
+        showArray(sorted); 
+      
+        
+        
+    }
     private static void testArray()
     {
         int[] array =

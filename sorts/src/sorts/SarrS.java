@@ -10,7 +10,29 @@ public class SarrS
 
     public static int[] bubbleSort(int[] array)
     {
+        int ixout;  //index for outer loop
+        int ixinn;  //index for inner loop
+        
+        for(ixout = array.length-1; ixout > 1; ixout--) //start at last value
+        {
+            for(ixinn = 0; ixinn < ixout; ixinn++) 
+            {
+                if (array[ixinn] > array[ixinn+1])      //if right value > left
+                {
+                    swap(ixinn, ixinn+1, array);        //call to swap
+                }
+            }
+          
+        }
         return array;
+    }
+    
+    public static void swap(int left, int right, int []array)
+    {
+        int temp = array[right];        //hold value to swap
+        array[right] = array[left];     //move higher value to right
+        array[left] = temp;             //complete swap by moving lesser value to the left
+        
     }
 
     public static int[] insertSort(int[] array)

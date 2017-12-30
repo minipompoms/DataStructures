@@ -1,196 +1,120 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package polynomial;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 /**
  *
- * @author Paige
+ * @author pkohn
  */
 public class PolynomialApp  {
     
     /**
      *
      * @param args
-     * @throws NotFoundException
      */
-    public static void main (String[] args) throws NotFoundException
+    private static final Scanner input = new Scanner(System.in);
+    
+    /**
+     *
+     * @param args
+     */
+    public static void main (String[] args) 
     {
        Polynomial polyA = new Polynomial(); //create instance 
        Polynomial polyB = new Polynomial(); //another for a second polynomial
 
       
        System.out.println("\tSTART");
-       Scanner input = new Scanner(System.in);
+       
        int choice;        // menu input
-       char exit = 0;     //check to continue inputs
+       char exit;    //check to continue inputs
        
        
        do{      
-          
+           exit = 0;
            choice = menu(); //get input from menu
            try{
-
+           
            switch(choice)
            {
                case 1:
-                   while(exit != 'x')
-                   {
-                       Monomial m = addTerm();
-                       polyA.addTerm(m);
-                       System.out.println("Insert another term or enter x to return to menu");
-                       
-                       exit = input.next().charAt(0);
-                       if (exit == 'x')
-                       {
-                           System.out.println(polyA);
-                           exit = 'x';
-                       }
-  
-                   }
                    
-                   exit = 0;
-                  
+                   while (exit != 'x')
+                   {
+                      Monomial m = addTerm();
+                      polyA.addTerm(m);
+                      System.out.println("Enter x to return to menu or another key to continue");
+                      exit = handleInsertTerm(polyA);
+                   }        
+                   exit = 'x';               
                break;
                
                case 2:
-                   
-                   while (exit != 'x')
-                   {
-                       Monomial m = addTerm();                    
-                       polyB.addTerm(m); 
-                       System.out.println("Insert another term or enter x to return to menu");
-                       
-                       exit = input.next().charAt(0);
-                       if (exit =='x')
-                       {
-                           System.out.println(polyB);
-                       }                      
-                   }
-                   exit = 0;
-               break;
-               
-               case 3:
-                   
-                   while (exit != 'x')
-                   {
-                       
-                       Monomial term = addTerm();
-                       Polynomial toAdd = new Polynomial();
-                       toAdd.addTerm(term);
-                       System.out.println("Which polynomial would you like to add?" + term);
-
-                       System.out.println("Enter A or B"); 
-                       
-                       String select = input.next();
-                       if (select.equalsIgnoreCase("a"))
-                       {
-                           System.out.println(" "+polyA + "\n+ " + term);
-                           toAdd.addition(polyA);                          
-                           System.out.println("="+polyA);
-                       }
-                       if (select.equalsIgnoreCase("b"))
-                       {
-                           System.out.println(" "+polyB + "\n+ " + term);
-                           toAdd.addition(polyB);
-                           System.out.println("="+polyB);
-                       }
-                           
-                   exit = 'x';
-                   }
-                   exit = 0;
-               break;
-               
-               case 4:
-                  while (exit != 'x')
-                  {
-
-                       System.out.println("   " + polyA + "\n + " + polyB);
-                       Polynomial tempA = polyA; 
-                       Polynomial tempB = polyB;//to retain original values
-                       Polynomial s = polyA.sum(polyB); //assign variable to sum
-                       System.out.println(" = " + s);
-                       polyA = tempA;
-                       polyB = tempB; //reassign originals
-                       
-                       exit = 'x';                          
-                  }
-                  exit =0;
                   
+                   while (exit != 'x')
+                   {
+                      Monomial mm = addTerm();                    
+                      polyB.addTerm(mm); 
+                      System.out.println("Enter x to return to menu or another key to continue");
+                      exit = handleInsertTerm(polyB);                     
+                   }
+                   exit = 'x';
+               break;
+               
+               case 3:                     
+                      addATerm(polyA, polyB);                          
+                      exit = 'x';                                    
+               break;
+               
+               case 4:                 
+                    sumPolynomials(polyA,polyB);                       
+                    exit = 'x';                                                    
                break; 
                
                case 5:
-                  while(exit != 'x')
-                  {
-                        System.out.println("Enter the constant you would like to multiply by:");
-                        double constant = input.nextDouble();
-                        System.out.println(" " + polyA + "\n*    " + constant);
-                        polyA.timesConstant(constant);
-                        System.out.print("=" + polyA +"\n");
-                        exit = 'x';                    
-                  }
-                  exit = 0;     
+                    multiplyConstant(polyA, polyB);
+                    exit = 'x';                                                         
                break;
                
-               case 6:
-                   while (exit != 'x')
-                   {
- 
-                        System.out.println("   " + polyA + "\n * " + polyB);
-                        Polynomial p = polyA.product(polyB);
-                        System.out.println(" = " + p);
-                        exit = 'x';
-                   }
-                    exit = 0;
+               case 6:                   
+                    multiplyPolys(polyA, polyB);
+                    exit = 'x';                                     
                break;
                
                case 7:
-                   
-                   System.out.println("Enter the coefficient of the value you would like to remove");
-                   double coeff = input.nextDouble();
-                   System.out.println("Enter the exponent of the value you would like to remove");
-                   int exp = input.nextInt();
-                   Monomial toRemove = new Monomial(exp, coeff);
-                   System.out.println("From which polynomial would you like to remove a term?");
-                   System.out.println("Enter A or B");             
-                   String select = input.next();
-                   
-                   if (select.equalsIgnoreCase("a"))
-                   {
-                     polyA.terms.remove(toRemove);
-                       System.out.println(toRemove + " was removed\n\n"+polyA);
-                   }
-                   if (select.equalsIgnoreCase("b"))
-                   {
-                       polyA.terms.remove(toRemove);
-                       System.out.println(toRemove+" was removed\n\n"+polyB);
-                   }
-                       
-               break;        
+                   removeTerm(polyA, polyB);   
+                   exit = 'x';
+               break;   
+               
                case 0:
                    System.out.println("\n\tGOODBYE");
                    System.exit(0);    
-           
+               break;
+              
            }
+          
        }catch(IllegalArgumentException iae)
        {
-           System.out.println("Invalid Entry: exponent must be a positive number");
+           System.out.println("Invalid Entry: exponent must be a positive number" + iae);
        }
         catch(NotFoundException nfe)
         {
-            System.out.println("No such value");
+            System.out.println(" error: ");
         }
        catch(NullPointerException npe)
        {
-           System.out.println("null");
+           System.out.println("error:  " + npe);
        }
-          
-       }while(choice != 0);
-        
+       catch(InputMismatchException ime)
+       {
+           System.out.println("Invalid Input");
+       }
+       
+       }while(choice != 0 && exit !=0);
+    
     }
     
     /**
@@ -199,8 +123,6 @@ public class PolynomialApp  {
      */
     public static int menu()
     {
-        Scanner input = new Scanner(System.in);
-        
         int answer; //menu choice
         
         System.out.println("\n1. Insert a term" + 
@@ -228,7 +150,6 @@ public class PolynomialApp  {
      */
     public static Monomial addTerm()
     {
-        Scanner input = new Scanner(System.in);
         System.out.println("ENTER A TERM\n");
         System.out.println("\tCoefficient:");
         double coeff = input.nextDouble();
@@ -239,5 +160,145 @@ public class PolynomialApp  {
         return monomial;
     }
     
+    /**
+     *
+     * @param x the Polynomial list referenced
+     * @return char option to exit menu
+     */
+    public static char handleInsertTerm(Polynomial x)
+    {
+        char exit = input.next().charAt(0);
+        
+            if (exit == 'x')
+            {
+                System.out.println(x); 
+            }          
+        return exit;
+    }
     
+    /**
+     *
+     * @param a the Polynomial list a
+     * @param b the Polynomial list b
+     * @return String input
+     */
+    public static String addATerm(Polynomial a, Polynomial b)
+    {
+        
+        Monomial term = addTerm();
+        Polynomial toAdd = new Polynomial();
+        toAdd.addTerm(term);
+        System.out.println("Which polynomial would you like to add?" + term);
+        System.out.println("Enter A or B");
+        
+        String select = input.next();
+        
+        if (select.equalsIgnoreCase("a"))
+        {                      
+            System.out.println(" "+ a + "\n+ " + term);
+            try {                          
+                toAdd.addition(a);
+            } catch (NotFoundException ex) {
+                System.out.println("error: " + ex);
+            }
+            System.out.println("="+ a);
+        }
+                       
+        if (select.equalsIgnoreCase("b"))
+        {
+            try {
+                System.out.println(" "+ b + "\n+ " + term);
+                toAdd.addition(b);
+                System.out.println("="+ b);
+            } catch (NotFoundException ex) {
+                System.out.println("error: " + ex);
+            }
+        }
+        
+        return select;
+    }
+    
+    /**
+     *
+     * @param a the Polynomial list a
+     * @param b the Polynomial list b
+     * @throws NotFoundException
+     */
+    public static void sumPolynomials(Polynomial a, Polynomial b) throws NotFoundException
+    {
+        System.out.println("   " + a + "\n + " + b);
+        Polynomial s = a.sum(b); //assign variable to sum
+        System.out.println(" = " + s);     
+    }
+    
+    /**
+     *
+     * @param a the Polynomial list a
+     * @param b the Polynomial list b
+     */
+    public static void multiplyConstant(Polynomial a, Polynomial b)
+    {
+            System.out.println("Which polynomial would you like to multiply by?");
+            System.out.println("Enter A or B");
+            String select = input.next();
+            
+            System.out.println("Enter the constant:");
+            double constant = input.nextDouble();
+            if (select.equalsIgnoreCase("a"))
+            {  
+              System.out.println(" " + a + "\n*    " + constant);
+              a.timesConstant(constant);
+              System.out.print("=" + a +"\n");    
+            }
+            
+            if (select.equalsIgnoreCase("b"))
+            {  
+              System.out.println(" " + b + "\n*    " + constant);
+              b.timesConstant(constant);
+              System.out.print("=" + b +"\n");    
+            }
+    }
+    
+    /**
+     *
+     * @param a the Polynomial list a
+     * @param b the Polynomial list b
+     * @throws NotFoundException
+     */
+    public static void multiplyPolys(Polynomial a, Polynomial b) throws NotFoundException
+    {       
+        System.out.println("   " + a + "\n * " + b);
+        Polynomial p = a.product(b);
+        System.out.println(" = " + p);
+    }
+    
+    /**
+     *
+     * @param a the Polynomial list a
+     * @param b the Polynomial list b
+     * @throws NotFoundException
+     */
+    public static void removeTerm(Polynomial a, Polynomial b) throws NotFoundException
+    {
+        System.out.println("Enter the coefficient of the value you would like to remove");
+        double coeff = input.nextDouble();
+        System.out.println("Enter the exponent of the value you would like to remove");
+        int exp = input.nextInt();
+        Monomial toRemove = new Monomial(exp, coeff);
+        System.out.println("From which polynomial would you like to remove a term?");
+        System.out.println("Enter A or B");             
+        String select = input.next();
+                   
+        if (select.equalsIgnoreCase("a"))
+        {
+            a.removeTerm(toRemove);
+            System.out.println(toRemove + " was removed\n\n"+ a);
+        }
+                   
+        if (select.equalsIgnoreCase("b"))
+        {
+            b.removeTerm(toRemove);
+            System.out.println(toRemove+" was removed\n\n"+ b);
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package sorts;
 
-import java.io.*;
+
 
 /**
  *
@@ -12,18 +12,15 @@ public class Sarr
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
-
-       // testArray();
-       //searchArray();
-       testBubbleSort(); 
-        
-        
-        
-        
-
-    }
+    
+//    public static void main(String[] args)
+//    {
+//
+//       // testArray();
+//       //searchArray();
+//       testBubbleSort(); 
+//
+//    }
 
     
     private static void testBubbleSort()
@@ -39,6 +36,7 @@ public class Sarr
         
         
     }
+    
     private static void testArray()
     {
         int[] array =

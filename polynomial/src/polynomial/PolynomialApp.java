@@ -280,9 +280,9 @@ public class PolynomialApp  {
      */
     public static void removeTerm(Polynomial a, Polynomial b) throws NotFoundException
     {
-        System.out.println("Enter the coefficient of the value you would like to remove");
+        System.out.println("Enter the coefficient of the value you would like to remove:");
         double coeff = input.nextDouble();
-        System.out.println("Enter the exponent of the value you would like to remove");
+        System.out.println("Enter the exponent of the value you would like to remove:");
         int exp = input.nextInt();
         Monomial toRemove = new Monomial(exp, coeff);
         System.out.println("From which polynomial would you like to remove a term?");

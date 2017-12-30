@@ -1,13 +1,18 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package polynomial;
+
 
 /**
  *
- * @author pkohn
+ * @author Paige Kohn
  */
 public class Polynomial {
     
-    private SDLLC<Monomial> terms;
+    SDLLC<Monomial> terms;
     
     /**
      * constructor
@@ -19,23 +24,13 @@ public class Polynomial {
     }
 
     /**
-     * to add a single monomial term to the list
+     * to add a single monomial term the list
      * @param term monomial to be inserted
      */
     public void addTerm(Monomial term)
     {
         terms.insert(term);
         
-    }
-    
-    /**
-     * to remove a single monomial term 
-     * @param term monomial to be removed
-     * @throws NotFoundException
-     */
-    public void removeTerm(Monomial term) throws NotFoundException
-    {
-        terms.remove(term);
     }
     
     /**

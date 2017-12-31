@@ -1,40 +1,37 @@
 
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vocabulary;
 /**
  *
- * @author Paige Kohn
+ * @author pkohn
  */
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author Paige
- */
 public class VocabularyCount
 {
      /**
      *
      * @param args
-     * @throws java.io.IOException
      */
-    public static void main(String [] args) throws IOException 
+    public static void main(String [] args) 
     {
    
   
-    String fname = "src/vocabulary/ACM.txt";     // input file of text
-    String word= null;                           // current word
+    String fname = args[0];     // input file of text
+    String word;                // current word
  
    
-    FileReader fin = new FileReader(fname);      // Set up file reading
+    FileReader fin = null;
+        try {
+            fin = new FileReader(fname); // Set up file reading
+        } catch (FileNotFoundException ex) {
+            System.out.println("Exception: file not found " + ex);
+        }
     Scanner wordsIn = new Scanner(fin);
     wordsIn.useDelimiter("[^a-zA-Z'']+");        // delimiters are nonletters
     

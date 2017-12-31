@@ -5,19 +5,20 @@ package vocabulary;
  * @author pkohn
  */
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VocabularyCount
 {
      /**
      *
      * @param args
-     * @throws java.io.IOException
      */
-    public static void main(String [] args) throws IOException 
+    public static void main(String [] args) 
     {
    
   
@@ -25,7 +26,12 @@ public class VocabularyCount
     String word;                // current word
  
    
-    FileReader fin = new FileReader(fname);      // Set up file reading
+    FileReader fin = null;
+        try {
+            fin = new FileReader(fname); // Set up file reading
+        } catch (FileNotFoundException ex) {
+            System.out.println("Exception: file not found " + ex);
+        }
     Scanner wordsIn = new Scanner(fin);
     wordsIn.useDelimiter("[^a-zA-Z'']+");        // delimiters are nonletters
     

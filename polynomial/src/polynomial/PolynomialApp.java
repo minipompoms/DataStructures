@@ -3,14 +3,12 @@ package polynomial;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-
 /**
  *
  * @author pkohn
  */
-public class PolynomialApp  {
-    
+public class PolynomialApp  
+{ 
     /**
      *
      * @param args
@@ -29,8 +27,8 @@ public class PolynomialApp  {
       
        System.out.println("\tSTART");
        
-       int choice;        // menu input
-       char exit;    //check to continue inputs
+       int choice;          // menu input
+       char exit;           //check to continue inputs
        
        
        do{      
@@ -134,8 +132,8 @@ public class PolynomialApp  {
                            "\n7. Remove a term" +
                            "\n0. Exit");
         answer = input.nextInt();
-                
-        while(answer < 0 || answer > 7)
+       
+        while(answer < 0 || answer > 7 )
         {
             System.out.println("PLEASE ENTER A VALID OPTION");
             answer = input.nextInt();
@@ -263,12 +261,12 @@ public class PolynomialApp  {
      *
      * @param a the Polynomial list a
      * @param b the Polynomial list b
-     * @throws NotFoundException
+     * @throws NotFoundException if no elements are on either list
      */
     public static void multiplyPolys(Polynomial a, Polynomial b) throws NotFoundException
     {       
-        System.out.println("   " + a + "\n * " + b);
-        Polynomial p = a.product(b);
+        System.out.println("   " + a + "\n * " + b); 
+        Polynomial p = a.product(b); 
         System.out.println(" = " + p);
     }
     
@@ -276,7 +274,7 @@ public class PolynomialApp  {
      *
      * @param a the Polynomial list a
      * @param b the Polynomial list b
-     * @throws NotFoundException
+     * @throws NotFoundException if either list contains no elements
      */
     public static void removeTerm(Polynomial a, Polynomial b) throws NotFoundException
     {

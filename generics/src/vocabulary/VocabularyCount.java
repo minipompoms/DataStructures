@@ -1,13 +1,8 @@
 
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vocabulary;
 /**
  *
- * @author Paige Kohn
+ * @author pkohn
  */
 
 import java.io.FileReader;
@@ -15,10 +10,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Scanner;
 
-/**
- *
- * @author Paige
- */
 public class VocabularyCount
 {
      /**
@@ -30,8 +21,8 @@ public class VocabularyCount
     {
    
   
-    String fname = "src/vocabulary/ACM.txt";     // input file of text
-    String word= null;                           // current word
+    String fname = args[0];     // input file of text
+    String word;                // current word
  
    
     FileReader fin = new FileReader(fname);      // Set up file reading

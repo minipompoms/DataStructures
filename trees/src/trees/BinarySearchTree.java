@@ -209,7 +209,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         }
         if (compareResult == 0)             // once element to remove is found
         {
-            t.count--;                      // deduct from count
+            t.count--;                      // deduct duplicate
         }
        
        

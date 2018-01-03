@@ -35,7 +35,15 @@ public class TreesApp {
                 tree.insert(ch);
                 System.out.println("Enter any character:");
             }
+            
+//            if (ch != '0')                //I tried doing it this way, 
+                                            //but it doesn't break out of the loop
+//            {
+//                 tree.insert(ch);
+//                System.out.println("Enter any character:");
+//            }
         }
+        
         
         System.out.println("    CURRENT TREE:   ");
         tree.printTree();

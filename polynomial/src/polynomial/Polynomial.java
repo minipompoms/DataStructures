@@ -91,7 +91,7 @@ public class Polynomial {
            x.addTerm(b.terms.next());         
        }
 
-        x = likeTerms(x);
+        x = combinelikeTerms(x);
         
         return x; 
     }
@@ -172,7 +172,7 @@ public class Polynomial {
              
             }             
         }
-        poly = likeTerms(poly);         //combine like terms
+        poly = combinelikeTerms(poly);         //combine like terms
         return poly;                    //new polynomial returned
     }
     
@@ -182,7 +182,7 @@ public class Polynomial {
      * @return - the simplified polynomial 
      * @throws NotFoundException
      */
-    public Polynomial likeTerms(Polynomial other) throws NotFoundException
+    public Polynomial combinelikeTerms(Polynomial other) throws NotFoundException
     {
         
         Polynomial result = new Polynomial();   //polynomial to be returned

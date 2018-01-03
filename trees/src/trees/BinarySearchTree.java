@@ -49,8 +49,18 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
      * @param x the item to remove.
      */
     public void remove(AnyType x)
-    {
-        root = remove(x, root);
+    {   
+        if (countDuplicates(x, root) < 2)    // if only one such element in tree
+        {
+            root = remove(x, root);         // call to remove
+        }
+        
+        else                                // if more than one such element exists
+        {
+           
+           removeDuplicate(x, root);        // call to remove Duplicate 
+        }
+                
     }
 
     /**
@@ -123,6 +133,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
        
        return countDuplicates(x, t);   //returns count of duplicates
     }
+  
     /**
      * Print the tree contents in sorted order.
      */
@@ -176,7 +187,33 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
        
         return t;
     }
-
+      /**
+     * Internal method to remove any Duplicates from a subtree.
+     *
+     * @param x the item to remove.
+     * @param t the node that roots the subtree.
+     */
+    private void removeDuplicate(AnyType x, BinaryNode<AnyType> t)
+    {
+        int compareResult = x.compareTo(t.element);
+        
+        if (compareResult < 0)              // if element is to left
+        {
+             removeDuplicate(x, t.left);    // keep going...
+            
+        }
+        else if (compareResult > 0)         // if element is to right
+        {
+           removeDuplicate(x, t.right);     // keep goin...
+            
+        }
+        if (compareResult == 0)             // once element to remove is found
+        {
+            t.count--;                      // deduct from count
+        }
+       
+       
+    }
     /**
      * Internal method to remove from a subtree.
      *
@@ -191,11 +228,12 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             return t;   // Item not found; do nothing
         }
         int compareResult = x.compareTo(t.element);
-
+       
+        
         if (compareResult < 0)
         {
             t.left = remove(x, t.left);
-           
+            
         }
         else if (compareResult > 0)
         {
@@ -206,12 +244,15 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         {
             t.element = findMin(t.right).element;
             t.right = remove(t.element, t.right);
+            
         }
         else
         {
             t = (t.left != null) ? t.left : t.right;
         }
-        t.count--;
+        
+        
+        
         return t;
     }
 
@@ -326,7 +367,9 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
        return t.count; //if no match will return 1 as default
         
     }
+    
  
+  
 
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
@@ -350,7 +393,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             right = rt;
             count = 1;
         }
-        
+
        
         
      

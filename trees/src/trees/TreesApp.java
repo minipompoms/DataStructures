@@ -26,7 +26,7 @@ public class TreesApp {
         while(ch != 0)   
         {
             ch = input.next().charAt(0);
-            if (ch == '0')
+            if (ch == '0')               
             {
                 break;
             }
@@ -37,30 +37,49 @@ public class TreesApp {
             }
         }
         
+        System.out.println("    CURRENT TREE:   ");
+        tree.printTree();
            
         System.out.println("Enter 'T' if you would like to see all values in the tree");
         System.out.println("Enter 'V' if you would like to see specific duplicates");
+        System.out.println("Enter 'R' if you would like to remove a character");
         
         String select = input.next();
         do{
-        if (select.equalsIgnoreCase("T"))
-        {
-            tree.printTree();
-        }
-        else if (select.equalsIgnoreCase("V"))
-        {
-            System.out.println("Enter the character to see the duplicate count");
-            ch = input.next().charAt(0);
-            System.out.println("There are " + tree.getDuplicates(ch)+
+            if (select.equalsIgnoreCase("T"))
+            {
+                tree.printTree();
+            }
+
+            
+            else if (select.equalsIgnoreCase("V"))
+            {
+                System.out.println("Enter the character to see the duplicate count");
+                ch = input.next().charAt(0);
+                System.out.println("There are " + tree.getDuplicates(ch)+
                     " duplicates of " +ch);
-            break;
-        }
-         else
-        {
-            System.out.println("Invalid Entry: Try again");
-            select = input.next();
-        }
-        }while(!"T".equalsIgnoreCase(select)|| "V".equalsIgnoreCase(select));
+                break;
+            }
+            
+            else if (select.equalsIgnoreCase("R"))
+            {
+                System.out.println("Enter the character to remove");
+                ch = input.next().charAt(0);
+                tree.remove(ch);
+//                System.out.println(ch + " has been removed. and now has " 
+//                        + tree.getDuplicates(ch) + "duplicates");
+                tree.printTree();
+                break;
+            }            
+        
+            else
+            {
+                System.out.println("Invalid Entry: Try again");
+                select = input.next();
+            }
+            
+        }while(!("T".equalsIgnoreCase(select)|| "V".equalsIgnoreCase(select) 
+                || "R".equalsIgnoreCase(select)));
        
  
     }

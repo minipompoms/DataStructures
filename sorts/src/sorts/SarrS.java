@@ -4,10 +4,16 @@ package sorts;
  * static methods to manipulate arrays passed to these methods
  *
  * @author MCO264
+ * modifications by @pkohn
  */
 public class SarrS
 {
 
+    /**
+     *
+     * @param array
+     * @return the array
+     */
     public static int[] bubbleSort(int[] array)
     {
         int ixout;  // outer loop index
@@ -27,6 +33,12 @@ public class SarrS
         return array;
     }
     
+    /**
+     *
+     * @param left index value
+     * @param right index value
+     * @param array 
+     */
     public static void swap(int left, int right, int []array)
     {
         int temp = array[right];        //hold value to swap
@@ -35,11 +47,21 @@ public class SarrS
         
     }
 
+    /**
+     *
+     * @param array
+     * @return the array
+     */
     public static int[] insertSort(int[] array)
     {
         return array;
     }
 
+    /**
+     *
+     * @param array
+     * @return the array
+     */
     public static int [] mergeSort(int [] array)
     {
         // make a copy of the original
@@ -140,6 +162,13 @@ public class SarrS
         return binarySearch(array, target, Direction.ASC);
     }
 
+    /**
+     *
+     * @param array
+     * @param target
+     * @param dir
+     * @return
+     */
     public static int binarySearch(int[] array, int target, Direction dir)
     {
         int index = -1;

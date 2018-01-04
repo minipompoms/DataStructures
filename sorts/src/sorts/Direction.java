@@ -6,5 +6,14 @@ package sorts;
  */
 public enum Direction
 {
-    ASC, DESC
+
+    /**
+     *
+     */
+    ASC,
+
+    /**
+     *
+     */
+    DESC
 }

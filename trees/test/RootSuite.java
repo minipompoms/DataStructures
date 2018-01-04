@@ -11,7 +11,7 @@ import org.junit.runners.Suite;
  * @author pkohn
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({trees.TreesSuite.class})
+@Suite.SuiteClasses({})
 public class RootSuite {
 
     @BeforeClass

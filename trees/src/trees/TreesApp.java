@@ -13,12 +13,14 @@ public class TreesApp {
      * 
      *@param args the command line arguments
      */
+    private static final Scanner input = new Scanner(System.in);
+    
     public static void main(String[] args) 
     {
        
        
         BinarySearchTree<Character> tree = new BinarySearchTree();
-        Scanner input = new Scanner(System.in);
+       
         
         char ch = 1;
         System.out.println("Enter any character, or press '0' to EXIT at anytime");
@@ -48,7 +50,7 @@ public class TreesApp {
         System.out.println("    CURRENT TREE:   ");
         tree.printTree();
            
-        System.out.println("Enter 'T' if you would like to see all values in the tree");
+        System.out.println("Enter 'T' if you would like to display all values in the tree");
         System.out.println("Enter 'V' if you would like to see specific duplicates");
         System.out.println("Enter 'R' if you would like to remove a character");
         
@@ -62,22 +64,12 @@ public class TreesApp {
             
             else if (select.equalsIgnoreCase("V"))
             {
-                System.out.println("Enter the character to see the duplicate count");
-                ch = input.next().charAt(0);
-                System.out.println("There are " + tree.getDuplicates(ch)+
-                    " duplicates of " +ch);
-                break;
+                displayDuplicates(tree);
             }
             
             else if (select.equalsIgnoreCase("R"))
             {
-                System.out.println("Enter the character to remove");
-                ch = input.next().charAt(0);
-                tree.remove(ch);
-//                System.out.println(ch + " has been removed. and now has " 
-//                        + tree.getDuplicates(ch) + "duplicates");
-                tree.printTree();
-                break;
+                remove(tree);            
             }            
         
             else
@@ -90,6 +82,34 @@ public class TreesApp {
                 || "R".equalsIgnoreCase(select)));
        
  
+    }
+    
+   
+    public static void displayDuplicates(BinarySearchTree<Character> tree)
+    {
+        System.out.println("Enter the character to see the duplicate count");
+        char ch = input.next().charAt(0);
+        System.out.println("There are " + tree.getDuplicates(ch)+
+                    " duplicates of " +ch);             
+    }
+    
+    
+    public static void remove(BinarySearchTree<Character> tree)
+    {       
+        System.out.println("Enter the character to remove");
+        char ch = input.next().charAt(0);
+        if (tree.contains(ch) == false)
+        {
+            System.out.println("No such character exists.");
+            
+        }
+        else 
+        {
+            tree.remove(ch);
+            System.out.println(ch + " has been removed. and now has " 
+                + tree.getDuplicates(ch) + "duplicates");
+            tree.printTree();
+        }
     }
     
 }

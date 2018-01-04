@@ -15,22 +15,35 @@ public class BinarySearchTreeTest {
     
     private BinarySearchTree<Integer> instance;
     
+    /**
+     *
+     */
     public BinarySearchTreeTest() 
     {
         
         
     }
     
+    /**
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public static void setUpClass() throws Exception
     {
         
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
@@ -38,6 +51,9 @@ public class BinarySearchTreeTest {
        System.out.println("Before");
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() 
     {
@@ -77,7 +93,27 @@ public class BinarySearchTreeTest {
         assertTrue(z.contains(88));
         z.remove(value);
         assertFalse(z.contains(value));
+        
+        assertFalse(z.contains(666));
       
+    }
+    
+    @Test
+    public void testRemoveDuplicate()
+    {
+        System.out.println("removeDuplicate");
+        Integer value = 666;
+        instance.insert(99999);
+        instance.insert(99999);
+        instance.insert(666);
+        instance.insert(666);
+        instance.insert(value);
+        assertEquals(3, instance.getDuplicates(value));
+        instance.remove(value);
+        assertEquals(2, instance.getDuplicates(666));
+        
+     
+        
     }
 
     /**
@@ -174,6 +210,8 @@ public class BinarySearchTreeTest {
         assertEquals(expResult, result);
         
     }
+    
+   
     
    
 

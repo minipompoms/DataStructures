@@ -49,18 +49,22 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
      * @param x the item to remove.
      */
     public void remove(AnyType x)
+            
     {   
-        if (countDuplicates(x, root) < 2)    // if only one such element in tree
+        if (contains(x))
         {
-            root = remove(x, root);         // call to remove
-        }
+            if (countDuplicates(x, root) < 2)        // if only one such element in tree
+            {
+                root = remove(x, root);              // call to remove
+            }
         
-        else                                // if more than one such element exists
-        {
+            else if (countDuplicates(x, root) > 1)   // if more than one such element exists
+            {
            
-           removeDuplicate(x, root);        // call to remove Duplicate 
-        }
-                
+                removeDuplicate(x, root);             // call to remove Duplicate 
+            }
+        } 
+        
     }
 
     /**
@@ -197,6 +201,9 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     {
         int compareResult = x.compareTo(t.element);
         
+        
+        
+        
         if (compareResult < 0)              // if element is to left
         {
              removeDuplicate(x, t.left);    // keep going...
@@ -211,6 +218,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         {
             t.count--;                      // deduct duplicate
         }
+
        
        
     }
@@ -354,6 +362,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     private int countDuplicates(AnyType x, BinaryNode<AnyType> t)
     {
       
+        
+       
         if(x.compareTo(t.element) > 0)      //will search right side for item in tree
         {
             return countDuplicates(x, t.right); //breaks if found
@@ -362,14 +372,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         {
             return countDuplicates(x, t.left); 
         }
-        else
-            
-       return t.count; //if no match will return 1 as default
+
         
+         return t.count; //if no match will return 1 as default
     }
-    
- 
-  
 
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>

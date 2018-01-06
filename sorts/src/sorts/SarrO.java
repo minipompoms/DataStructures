@@ -78,9 +78,52 @@ public class SarrO
      * @param target
      * @return
      */
-    public int BinarySearch(int target)
+    public int binarySearch(int target)
     {
-        return -1;
+        int index = -1;
+        Direction dir = null;
+        if (array.length > 0)
+        {
+            int leftix = 0;
+            int rightix = array.length - 1;
+
+            while (leftix <= rightix)
+            {
+                int mIndex = (rightix + leftix) / 2;
+                int mValue = array[mIndex];
+                if (mValue == target)
+                {
+                    index = mIndex;
+                    break;
+                }
+                else if (mValue < target)
+                {
+                    if (dir == Direction.ASC)
+                    {
+                        leftix = mIndex + 1;
+                    }
+                    else
+                    {
+                        rightix = mIndex - 1;
+                    }
+                }
+
+                else
+                {
+                    if (dir == Direction.ASC)
+                    {
+                        rightix = mIndex - 1;
+                    }
+                    else
+                    {
+                        leftix = mIndex + 1;
+                    }
+                }
+            }
+
+        }
+        return index;
     }
+    
 
 }

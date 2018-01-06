@@ -1,4 +1,4 @@
-package sorts;
+    package sorts;
 
 /**
  *
@@ -11,36 +11,60 @@ public class sortsApp {
      */
     public static void main(String[] args) 
     {
-         testBubbleSort(); 
-         test();
+//        testBubbleSort(); 
+//        testMergeSort();
+//        testBubbleSortSarrO();
+        testBinarySort();
             
     }
     
    
-    
-    private static void test()
+    private static void testBinarySort()
     {
+       int [] array = { 100, 150, 200, 225, 250, 50, 300, 125, 175, 275, 0};
+       System.out.println("\nunsorted array:");
+       showArray(array);
+       SarrO b = new SarrO(array);
+       b.binarySearch(0);
+       System.out.println("\n(SarrO binarySort) sorted array: " );
+       b.display();
        
-        System.out.println(":unsorted array:");
-        int [] array = { 91, 20, 3, 65, 71, 11, 8, 52, 49, 68 };         
-        showArray(array);
-        SarrO s = new SarrO(array);        
-        s.bubbleSort();  
-        System.out.println("sorted array: " );
-        s.display();       
+        
     }
+    
     
     
     private static void testBubbleSort()
     {
         int [] array = { 43, 7, 10, 23, 18, 4, 19, 5, 66, 14 };
-        System.out.println("unsorted array:");
+        System.out.println("\nunsorted array:");
         showArray(array);
         
         int []sorted = SarrS.bubbleSort(array);
-        System.out.println("sorted array: " );
+        System.out.println("\n(bubbleSort) sorted array: " );
         showArray(sorted); 
-  
+    }
+    
+    private static void testBubbleSortSarrO()
+    {
+        System.out.println("\n:unsorted array:");
+        int [] arrayB = { 91, 20, 3, 65, 71, 11, 8, 52, 49, 68 };         
+        showArray(arrayB);
+        SarrO b = new SarrO(arrayB);        
+        b.bubbleSort();  
+        System.out.println("\n(SarrO bubbleSort) sorted array: " );
+        b.display();
+    }
+    
+    private static void testMergeSort()
+    {
+        int [] array = { 28, 88, 1, 40, 309, 31, 93, 10, 222, 6, 777 };
+        System.out.println("\nunsorted array:");
+        showArray(array);
+        
+        int[] sorted = SarrS.mergeSort(array);
+        System.out.println("\n(mergeSort) descending sorted array:" );
+        showArray(sorted);
     }
     
     private static void showArray(int[] array)

@@ -53,15 +53,13 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     {   
         if (contains(x))
         {
-            if (countDuplicates(x, root) < 2)        // if only one such element in tree
+            if (countDuplicates(x, root) > 1)   // if more than one such element exists
+            {     
+                removeDuplicate(x, root);             // call to remove Duplicate 
+            }
+            else if (countDuplicates(x, root) == 1)        // if only one such element in tree
             {
                 root = remove(x, root);              // call to remove
-            }
-        
-            else if (countDuplicates(x, root) > 1)   // if more than one such element exists
-            {
-           
-                removeDuplicate(x, root);             // call to remove Duplicate 
             }
         } 
         
@@ -200,10 +198,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     private void removeDuplicate(AnyType x, BinaryNode<AnyType> t)
     {
         int compareResult = x.compareTo(t.element);
-        
-        
-        
-        
+     
         if (compareResult < 0)              // if element is to left
         {
              removeDuplicate(x, t.left);    // keep going...

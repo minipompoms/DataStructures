@@ -1,6 +1,8 @@
 
 package trees;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
@@ -13,103 +15,147 @@ public class TreesApp {
      * 
      *@param args the command line arguments
      */
-    private static final Scanner input = new Scanner(System.in);
-    
+    private static Scanner input;
+    private static BinarySearchTree<String> tree = new BinarySearchTree<>();
+
     public static void main(String[] args) 
     {
        
-       
-        BinarySearchTree<Character> tree = new BinarySearchTree();
-       
-        
-        char ch = 1;
-        System.out.println("Enter any character, or press '0' to EXIT at anytime");
-        
-        while(ch != 0)   
-        {
-            ch = input.next().charAt(0);
-            if (ch == '0')               
-            {
-                break;
-            }
-            else
-            {
-                tree.insert(ch);
-                System.out.println("Enter any character:");
-            }
-            
-//            if (ch != '0')                //I tried doing it this way, 
-                                            //but it doesn't break out of the loop
-//            {
-//                 tree.insert(ch);
-//                System.out.println("Enter any character:");
-//            }
-        }
-        
-        
-        System.out.println("    CURRENT TREE:   ");
+        input = new Scanner(System.in);
+        loadTreeFromFile(getInputFile(args));
+
+        System.out.println("Tree with all values inserted from file:");
         tree.printTree();
-           
-        System.out.println("Enter 'T' if you would like to display all values in the tree");
-        System.out.println("Enter 'V' if you would like to see specific duplicates");
-        System.out.println("Enter 'R' if you would like to remove a character");
-        
-        String select = input.next();
-        do{
-            if (select.equalsIgnoreCase("T"))
+
+        int choice = menu();
+        while (choice != 0)
+        {
+            System.out.println();
+            switch (choice)
             {
-                tree.printTree();
+                case 1:
+                    System.out.print("Please enter string to remove:");
+                    removeAndDisplay(input.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Please enter string to check for:");
+                    contains(input.nextLine());
+                    break;
+                case 3:
+                    findMin();
+                    break;
+                case 4:
+                    findMax();
+                    break;
+                default:
+                    System.out.println("Unrecognized value.");
             }
 
-            
-            else if (select.equalsIgnoreCase("V"))
-            {
-                displayDuplicates(tree);
-            }
-            
-            else if (select.equalsIgnoreCase("R"))
-            {
-                remove(tree);            
-            }            
-        
-            else
-            {
-                System.out.println("Invalid Entry: Try again");
-                select = input.next();
-            }
-            
-        }while(!("T".equalsIgnoreCase(select)|| "V".equalsIgnoreCase(select) 
-                || "R".equalsIgnoreCase(select)));
-       
- 
+            choice = menu();
+        }
+
+        System.out.println("Goodbye.");
+
     }
-    
-   
-    public static void displayDuplicates(BinarySearchTree<Character> tree)
+
+    /**
+     * gets the file which has the strings to insert
+     *
+     * @param args the command line arguments that were passed to the
+     * application (arg[0] should be the file location)
+     * @return the full filepath with the strings
+     */
+    private static File getInputFile(String[] args)
     {
-        System.out.println("Enter the character to see the duplicate count");
-        char ch = input.next().charAt(0);
-        System.out.println("There are " + tree.getDuplicates(ch)+
-                    " duplicates of " +ch);             
+        String fileName;
+        if (args.length == 0)
+        {
+            System.out.println("Please enter file containing tree entries");
+            fileName = input.nextLine();
+        }
+        else
+        {
+            fileName = args[0];
+        }
+        File file = new File(fileName);
+
+        return file;
     }
-    
-    
-    public static void remove(BinarySearchTree<Character> tree)
-    {       
-        System.out.println("Enter the character to remove");
-        char ch = input.next().charAt(0);
-        if (tree.contains(ch) == false)
+
+    /**
+     * inserts strings into the AVL tree from a file
+     *
+     * @param file the file to insert from
+     * @throws FileNotFoundException if the file doesn't exist
+     */
+    private static boolean loadTreeFromFile(File file)
+    {
+        boolean aOK = false;
+        try (Scanner fileInput = new Scanner(file))
         {
-            System.out.println("No such character exists.");
-            
+            while (fileInput.hasNext())
+            {
+                tree.insert(fileInput.next());
+            }
+            aOK = true;
         }
-        else 
+        catch (FileNotFoundException exc)
         {
-            tree.remove(ch);
-            System.out.println(ch + " has been removed. and now has " 
-                + tree.getDuplicates(ch) + "duplicates");
-            tree.printTree();
+            System.out.println(exc.getMessage());
         }
+        return aOK;
+    }
+
+    private static int menu()
+    {
+        System.out.print("\nPlease choose one of the following options:"
+                + "\n1. Remove a value from the tree"
+                + "\n2. Check if a value is contained in the tree"
+                + "\n3. Find the minimal value of the tree"
+                + "\n4. Find the maximal value of the tree"
+                + "\n0. Exit:\n");
+
+        int choice = UserInput.getInt(UserInput.Source.SCANNER, "Enter value ", 0, 4);
+        return choice;
+    }
+
+    /**
+     * removes given element from the AVL tree and then displays the tree
+     *
+     * @param str string to remove
+     */
+    private static void removeAndDisplay(String str)
+    {
+        tree.remove(str);
+        System.out.println("Tree after remove was called:");
+        tree.printTree();
+    }
+
+    /**
+     * checks if the given value is contained in the AVL tree
+     */
+    private static void contains(String str)
+    {
+        System.out.println("Testing if tree contains \"" + str + "\": "
+                + tree.contains(str));
+    }
+
+    /**
+     * finds the smallest element in the AVL tree
+     */
+    private static void findMin()
+    {
+        System.out.println("The smallest element in the tree is \""
+                + tree.findMin() + "\".");
+    }
+
+    /**
+     * finds the largest element in the AVL tree
+     */
+    private static void findMax()
+    {
+        System.out.println("The largest element in the tree is \""
+                + tree.findMax() + "\".");
     }
     
 }

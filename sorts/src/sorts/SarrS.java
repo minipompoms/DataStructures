@@ -70,7 +70,7 @@ public class SarrS
         }
         
         // sort the copy
-        msort(0, another.length-1, another, Direction.ASC);
+        msort(0, another.length-1, another, Direction.DESC);
         return another;
     }
     

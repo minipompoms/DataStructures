@@ -14,12 +14,12 @@ public class sortsApp {
         testBubbleSort(); 
         testMergeSort();
         testBubbleSortSarrO();
-        testBinarySort();
+        testBinarySearch();
             
     }
     
    
-    private static void testBinarySort()
+    private static void testBinarySearch()
     {
         int [] array = { 100, 150, 200, 225, 250, 50, 300, 125, 175, 275, 25};
         System.out.println("\nArray values:");

@@ -1,5 +1,4 @@
 package sorts;
-
 /**
  * static methods to manipulate arrays passed to these methods
  *
@@ -8,7 +7,6 @@ package sorts;
  */
 public class SarrS
 {
-
     /**
      *
      * @param array
@@ -19,7 +17,7 @@ public class SarrS
         int ixout;  // outer loop index
         int ixinn;  // inner loop index
         
-        for(ixout = array.length-1; ixout > 1; ixout--) // start at last value
+        for(ixout = array.length-1; ixout > 0; ixout--) // start at last value
         {
             for(ixinn = 0; ixinn < ixout; ixinn++) 
             {
@@ -72,12 +70,12 @@ public class SarrS
         }
         
         // sort the copy
-        msort(0, another.length-1, another);
+        msort(0, another.length-1, another, Direction.ASC);
         return another;
     }
     
     
-    private static void msort(int left, int rite, int [] array)
+    private static void msort(int left, int rite, int [] array, Direction dir)
     {
         
         int size = rite - left;
@@ -85,29 +83,38 @@ public class SarrS
         
         if (size == 1) 
         {
-            if (array[left] < array[rite]) //if left element less than right element
+            if(dir == Direction.DESC)
             {
-               
-                int tmp = array[left]; //hold value of the left element
-                
-                array[left] = array[rite]; //assign greater value from right side of array
-                array[rite] = tmp;  //complete swap with lesser value held in tmp           
+                if (array[left] < array[rite]) //if left element less than right element
+                {               
+                    int tmp = array[left]; //hold value of the left element               
+                    array[left] = array[rite]; //assign greater value from right side of array
+                    array[rite] = tmp;  //complete swap with lesser value held in tmp           
+                }
+            }
+            else
+            {
+                if (array[left] > array[rite])  
+                {
+                    int tmp = array[rite];     
+                    array[rite] = array[left]; 
+                    array[left] = tmp;                   
+                }
             }
         }
+        
         else if (size > 1)
         {
             
-            
-            msort(left, midl, array);
-          
-            msort (midl+1, rite, array);
-            
-            merge(left,midl, midl+1, rite, array);
+            msort(left, midl, array, dir);          
+            msort (midl+1, rite, array, dir);           
+            merge(left, midl, midl+1, rite, array, dir);
        
         }
         
     }
-    private static void merge(int lmin, int lmax, int rmin, int rmax, int [] array)
+    
+    private static void merge(int lmin, int lmax, int rmin, int rmax, int [] array, Direction dir)
     {
         int  []  tmpArr = new int[array.length];
         int ixl = lmin;
@@ -116,32 +123,47 @@ public class SarrS
         
         while (ixl <= lmax && ixr <= rmax) 
         {
-           
-            if (array[ixl] > array[ixr])
+            if (dir == Direction.DESC)
             {
-                tmpArr[ixt++] = array[ixl++];
+
+               if (array[ixl] > array[ixr])
+                {
+                    tmpArr[ixt++] = array[ixl++];
                 
+                }
+                else
+                {
+                    tmpArr[ixt++] = array[ixr++];
+                }
             }
             else
             {
-                tmpArr[ixt++] = array[ixr++];
+                if (array[ixl] < array[ixr])
+                {
+                    tmpArr[ixt++] = array[ixl++];
+                
+                }
+                else
+                {
+                    tmpArr[ixt++] = array[ixr++];
+                }
             }
         }
         
         // only one of these two loops will actually run
         while (ixl <= lmax)
         {
-            tmpArr[ixt++]= array[ixl++];
+            tmpArr[ixt++] = array[ixl++];
         }
         
         while (ixr <= rmax)
         {
-            tmpArr[ixt++]= array[ixr++];
+            tmpArr[ixt++] = array[ixr++];
         }
         
         
         // now copy back from tmpArr
-         ixt = 0;
+        ixt = 0;
         for (int ix = lmin; ix <= rmax; ++ix)
         {
             array[ix] = tmpArr[ixt++];
@@ -171,6 +193,7 @@ public class SarrS
      */
     public static int binarySearch(int[] array, int target, Direction dir)
     {
+        
         int index = -1;
         if (array.length > 0)
         {

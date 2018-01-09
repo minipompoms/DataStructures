@@ -1,5 +1,4 @@
 
-
 package sorts;
 
 /**
@@ -42,14 +41,14 @@ public class SarrO
     }
     
     /**
-     *
+     * 
      */
     public void bubbleSort()
     {
         int ixinn;      // outer loop index
         int ixout;      // inner loop index
         
-        for (ixout = array.length-1; ixout > 1; ixout--)    // start at last value
+        for (ixout = array.length-1; ixout > 0; ixout--)    // start at last value
         {
             for (ixinn = 0; ixinn < ixout; ixinn++)         // if right value > left
             {
@@ -81,49 +80,75 @@ public class SarrO
     public int binarySearch(int target)
     {
         int index = -1;
-        Direction dir = null;
+        Direction dir = Direction.ASC;
+       
         if (array.length > 0)
         {
-            int leftix = 0;
-            int rightix = array.length - 1;
-
-            while (leftix <= rightix)
+            
+            int lIndex = 0;
+            int rIndex = array.length - 1;
+            
+            while (lIndex <= rIndex)
             {
-                int mIndex = (rightix + leftix) / 2;
+               
+                int mIndex = (rIndex + lIndex) / 2;
                 int mValue = array[mIndex];
                 if (mValue == target)
                 {
+                    
                     index = mIndex;
                     break;
                 }
+                
                 else if (mValue < target)
                 {
+               
+
                     if (dir == Direction.ASC)
                     {
-                        leftix = mIndex + 1;
+                        lIndex = mIndex + 1;
+                        
                     }
+                    
                     else
                     {
-                        rightix = mIndex - 1;
+                        rIndex = mIndex - 1;
                     }
+                    
                 }
-
+                 
                 else
                 {
+                    
                     if (dir == Direction.ASC)
                     {
-                        rightix = mIndex - 1;
+                        
+                        rIndex = mIndex - 1;
                     }
                     else
                     {
-                        leftix = mIndex + 1;
+                        
+                        lIndex = mIndex + 1;
                     }
                 }
+                
             }
-
+           
         }
         return index;
     }
     
+    
+   /**
+     * return the index of target in array
+     *
+     * @param array : int[] - array to search
+     * @param target : int - element to search in array
+     * @return : int - index, -1 if not found
+     */
+    public int index(int[] array, int target)
+    {
+        return binarySearch(target);
+    }
 
 }

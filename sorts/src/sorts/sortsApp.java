@@ -11,9 +11,9 @@ public class sortsApp {
      */
     public static void main(String[] args) 
     {
-//        testBubbleSort(); 
-//        testMergeSort();
-//        testBubbleSortSarrO();
+        testBubbleSort(); 
+        testMergeSort();
+        testBubbleSortSarrO();
         testBinarySort();
             
     }
@@ -21,22 +21,23 @@ public class sortsApp {
    
     private static void testBinarySort()
     {
-       int [] array = { 100, 150, 200, 225, 250, 50, 300, 125, 175, 275, 0};
-       System.out.println("\nunsorted array:");
-       showArray(array);
-       SarrO b = new SarrO(array);
-       b.binarySearch(0);
-       System.out.println("\n(SarrO binarySort) sorted array: " );
-       b.display();
+        int [] array = { 100, 150, 200, 225, 250, 50, 300, 125, 175, 275, 25};
+        System.out.println("\nArray values:");
+        showArray(array);    
+        int key = 150;
        
+        SarrO b = new SarrO(array);         
+        b.bubbleSort();   
+        int index = b.index(array, key);    
         
+        System.out.println("\nNumber " + key + " found in slot " + (index+1));
+        b.display();
+
     }
-    
-    
-    
+   
     private static void testBubbleSort()
     {
-        int [] array = { 43, 7, 10, 23, 18, 4, 19, 5, 66, 14 };
+        int [] array = { 43, 7, 10, 23, 18, 4, 19, 5, 66, 14, 1 };
         System.out.println("\nunsorted array:");
         showArray(array);
         
@@ -48,7 +49,7 @@ public class sortsApp {
     private static void testBubbleSortSarrO()
     {
         System.out.println("\n:unsorted array:");
-        int [] arrayB = { 91, 20, 3, 65, 71, 11, 8, 52, 49, 68 };         
+        int [] arrayB = { 91, 20, 3, 65, 71, 11, 8, 52, 49, 68, 2 };         
         showArray(arrayB);
         SarrO b = new SarrO(arrayB);        
         b.bubbleSort();  
